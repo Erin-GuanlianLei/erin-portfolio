@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Spring Food Bar — Case Study | Erin Lei</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-warm-white: #FAF7F2;
+      --text-dark: #1A1A1A;
+      --border-color: #E2DDD5;
+      --accent-gray: #757471;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-warm-white);
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 顶部导航栏 */
+    header {
+      padding: 2rem 4rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      border-bottom: 1px solid var(--text-dark);
+      padding-bottom: 2px;
+    }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* 主体内容区：左右两栏布局 */
+    .case-container {
+      display: flex;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* 左侧：文案与分析详情 */
+    .case-text-pane {
+      width: 55%;
+      padding: 5rem 4rem;
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+    }
+
+    .case-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+
+    .case-header .tags {
+      font-size: 0.8rem;
+      color: var(--accent-gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    /* 下载报告按钮 */
+    .download-section {
+      margin-bottom: 3rem;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background-color: var(--text-dark);
+      color: var(--bg-warm-white);
+      padding: 0.9rem 1.8rem;
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-download:hover {
+      background-color: #333;
+    }
+
+    /* 报告内容分块 */
+    .section-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-block h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--text-dark);
+    }
+
+    .section-block p, .section-block li {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-block ul {
+      padding-left: 1.2rem;
+    }
+
+    /* 右侧：视频及音量控制 */
+    .case-media-pane {
+      width: 45%;
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #F4EFF6;
+      position: relative;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* 音量控制悬浮按钮 */
+    .sound-toggle-btn {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background-color 0.2s;
+    }
+
+    .sound-toggle-btn:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    @media (max-width: 1024px) {
+      .case-container { flex-direction: column; }
+      .case-text-pane, .case-media-pane { width: 100%; padding: 3rem 2rem; }
+      header { padding: 1.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="../index.html" class="back-link">← Back to Portfolio</a>
+    <div class="brand-title">Erin Lei — Case Study</div>
+  </header>
+
+  <div class="case-container">
+    
+    <!-- 左侧：文案与策略分析 -->
+    <div class="case-text-pane">
+      <div class="case-header">
+        <h1>A Spring Food Bar</h1>
+        <p class="tags">Digital & Social Media Marketing Strategy</p>
+      </div>
+
+      <!-- 专业分析报告下载区域 -->
+      <div class="download-section">
+        <a href="../assets/report.pdf" download class="btn-download">
+          ↓ Download Full Analysis Report (PDF)
+        </a>
+      </div>
+
+      <!-- A. Target Audience -->
+      <div class="section-block">
+        <h3>Target Audience</h3>
+        <p>The target audience includes two key segments. The first group is local families living in Hobart aged 25–55 who prefer clean, safe, and spacious restaurants and are open to trying different cuisines. The second group is Chinese consumers in Hobart aged 18–40, including international students and migrants, who look for authentic Chinese food for social gatherings. Both groups value food quality, a comfortable dining environment, and shared dining experiences.</p>
+        <p>A key problem is finding restaurants in Hobart that feel both authentic and clean and are suitable for group dining. These audiences commonly use TikTok and Instagram for food discovery and prefer short, casual, and visually engaging video content.</p>
+      </div>
+
+      <!-- B. Objective -->
+      <div class="section-block">
+        <h3>Objective</h3>
+        <p>Increase dine-in customer traffic at A Spring Food Bar by improving local awareness through short-form video content on TikTok and Instagram Reels within four weeks. This focuses on the awareness and action stages of the consumer journey, where audiences discover the restaurant through social media and are encouraged to visit in person.</p>
+      </div>
+
+      <!-- C. Core Message -->
+      <div class="section-block">
+        <h3>Core Message</h3>
+        <p>A Spring Food Bar offers clean, high-quality, and authentic Chinese food in Hobart, suitable for family meals and group dining.</p>
+      </div>
+
+      <!-- D. Platform Selection -->
+      <div class="section-block">
+        <h3>Platform Selection</h3>
+        <p>TikTok and Instagram Reels are selected because they are highly popular among the target audiences and effective for food discovery. These platforms prioritise short-form engaging content and algorithm-driven distribution, which helps reach users based on interests and behaviour. The short video format also suits a creative opening and makes it easy to present the restaurant’s location, environment, and food quickly and clearly.</p>
+      </div>
+
+      <!-- E. Content Structure -->
+      <div class="section-block">
+        <h3>Content Structure (AIDA Model)</h3>
+        <ul>
+          <li><strong>Attention:</strong> Created through a POV-style opening with a meme-based visual hook and a creative transition that shifts from the imagined scenario to the real restaurant.</li>
+          <li><strong>Interest:</strong> Developed by presenting the restaurant location and showing the dining environment in a clear and observational style.</li>
+          <li><strong>Desire:</strong> Built through menu and food visuals supported by personal comments from a Chinese consumer perspective on authenticity and taste. Bilingual captions are used throughout the video to make the content accessible to both English-speaking families and Chinese consumers.</li>
+          <li><strong>Action:</strong> Encouraged through a direct recommendation and an invitation for viewers to visit the restaurant for group dining.</li>
+        </ul>
+      </div>
+
+      <!-- F. Key Performance Indicators -->
+      <div class="section-block">
+        <h3>Key Performance Indicators (KPIs)</h3>
+        <p>Video views measure overall awareness. Watch time indicates engagement and content retention. Saves and comments reflect interest in the restaurant. Profile visits and location searches suggest stronger visit intention. These metrics represent different stages of audience response and help evaluate whether the video successfully drives awareness and increases dine-in traffic.</p>
+      </div>
+    </div>
+
+    <!-- 右侧：循环视频与音量控制 -->
+    <div class="case-media-pane">
+      <div class="video-wrapper">
+        <!-- 默认设置 autoplay、loop、muted 确保自动循环播放 -->
+        <video id="promoVideo" autoplay loop muted playsinline>
+          <source src="../assets/spring-food-video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <!-- 音量开关按钮 -->
+        <button id="soundToggle" class="sound-toggle-btn" onclick="toggleSound()">Unmute</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleSound() {
+      const video = document.getElementById('promoVideo');
+      const btn = document.getElementById('soundToggle');
+      if (video.muted) {
+        video.muted = false;
+        btn.innerText = 'Mute';
+      } else {
+        video.muted = true;
+        btn.innerText = 'Unmute';
+      }
+    }
+  </script>
+
+</body>
+</html>
