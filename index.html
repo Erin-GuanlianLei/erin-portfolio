@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Erin Lei — Portfolio Exhibition</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <!--
+    在页面真正显示之前就判断：
+    这个浏览器 session 是否已经进入过展览。
+    这样从项目页返回时不会闪一下 Welcome Page。
+  -->
+  <script>
+    if (sessionStorage.getItem('erinPortfolioEntered') === 'true') {
+      document.documentElement.classList.add('skip-welcome');
+    } else {
+      document.documentElement.classList.add('show-welcome');
+    }
+  </script>
+
+
   <style>
+
     :root {
       --bg-warm-white: #FAF7F2;
       --text-dark: #1A1A1A;
@@ -16,277 +38,1170 @@
       --accent-gray: #757471;
     }
 
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+
     body {
       background-color: var(--bg-warm-white);
       color: var(--text-dark);
       font-family: 'Inter', sans-serif;
+
       height: 100vh;
+
       overflow: hidden;
     }
+
+
+    /* ==================================================
+       WELCOME — EXHIBITION ENTRANCE
+       ================================================== */
+
+
+    .welcome-screen {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 9999;
+
+      width: 100vw;
+      height: 100vh;
+
+      background-color: var(--bg-warm-white);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      padding: 3.5rem 4rem;
+
+      transform: translateX(0);
+
+      transition:
+        transform 1.05s cubic-bezier(0.76, 0, 0.24, 1),
+        opacity 0.8s ease;
+    }
+
+
+    /*
+      如果已经进入过，
+      Welcome Page 完全不显示。
+    */
+
+    html.skip-welcome .welcome-screen {
+      display: none;
+    }
+
+
+    /*
+      点击 Begin 后向左滑走
+    */
+
+    .welcome-screen.leave {
+      transform: translateX(-100%);
+    }
+
+
+    .welcome-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 0.7rem;
+
+      letter-spacing: 0.2em;
+
+      text-transform: uppercase;
+
+      color: var(--accent-gray);
+    }
+
+
+    .welcome-content {
+      max-width: 1100px;
+
+      position: relative;
+    }
+
+
+    .welcome-small {
+      font-size: 0.75rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.24em;
+
+      color: var(--accent-gray);
+
+      margin-bottom: 1.5rem;
+    }
+
+
+    .welcome-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: clamp(4.5rem, 8vw, 8.5rem);
+
+      font-weight: 400;
+
+      line-height: 0.87;
+
+      letter-spacing: -0.045em;
+
+      margin-bottom: 3rem;
+    }
+
+
+    .welcome-keywords {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 0.7rem 2.4rem;
+
+      margin-bottom: 2.5rem;
+    }
+
+
+    .welcome-keywords span {
+      font-size: 0.73rem;
+
+      letter-spacing: 0.15em;
+
+      text-transform: uppercase;
+
+      color: #555;
+    }
+
+
+    .welcome-description {
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 1.5rem;
+
+      font-style: italic;
+
+      line-height: 1.45;
+
+      color: #444;
+
+      max-width: 480px;
+    }
+
+
+    .enter-btn {
+      align-self: flex-start;
+
+      background: transparent;
+
+      border: none;
+      border-bottom: 1px solid var(--text-dark);
+
+      padding: 0 0 0.45rem 0;
+
+      color: var(--text-dark);
+
+      font-family: 'Inter', sans-serif;
+
+      font-size: 0.78rem;
+
+      font-weight: 500;
+
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.35s ease,
+        letter-spacing 0.35s ease;
+    }
+
+
+    .enter-btn:hover {
+      transform: translateX(10px);
+
+      letter-spacing: 0.22em;
+    }
+
+
+
+    /* ==================================================
+       MAIN PORTFOLIO ENTRANCE MOTION
+       ================================================== */
+
 
     .gallery-container {
       display: flex;
+
       width: 100vw;
       height: 100vh;
+
+      opacity: 1;
+
+      transform: translateX(0);
+
+      transition:
+        transform 1.05s cubic-bezier(0.76, 0, 0.24, 1),
+        opacity 0.8s ease;
     }
 
-    /* 左侧：静态品牌与 Personal Quote 展厅 */
+
+    /*
+      Welcome 还在显示的时候，
+      Portfolio 在它右边轻微等待。
+    */
+
+    html.show-welcome .gallery-container {
+      transform: translateX(10vw);
+      opacity: 0.55;
+    }
+
+
+    /*
+      点击 Begin 后 Portfolio 滑进来。
+    */
+
+    html.entered-exhibition .gallery-container {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+
+    /*
+      点击项目以后，
+      整个 Portfolio 向左离场。
+    */
+
+    body.page-leaving .gallery-container {
+      transform: translateX(-100vw);
+      opacity: 0.35;
+    }
+
+
+
+    /* ==================================================
+       LEFT SIDEBAR
+       ================================================== */
+
+
     .sidebar {
       width: 32%;
+
       height: 100%;
+
       border-right: 1px solid var(--border-color);
+
       padding: 4rem 3rem;
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
       background-color: var(--bg-warm-white);
+
       z-index: 2;
     }
 
+
     .brand h1 {
       font-family: 'Cormorant Garamond', serif;
+
       font-size: 3rem;
+
       font-weight: 400;
+
       letter-spacing: -0.02em;
+
       line-height: 1;
     }
 
+
     .brand p {
       font-size: 0.75rem;
+
       text-transform: uppercase;
+
       letter-spacing: 0.25em;
+
       color: var(--accent-gray);
+
       margin-top: 0.8rem;
     }
 
+
     .motto {
       font-family: 'Cormorant Garamond', serif;
+
       font-size: 1.6rem;
+
       line-height: 1.4;
+
       font-style: italic;
+
       color: #333;
+
       max-width: 85%;
     }
 
+
     .sidebar-footer {
       font-size: 0.8rem;
+
       color: var(--accent-gray);
+
       line-height: 1.6;
     }
 
-    /* 右侧：“竹简/折扇”平移展区 */
+
+
+    /* ==================================================
+       FAN GALLERY
+       ================================================== */
+
+
     .fan-gallery {
       width: 68%;
+
       height: 100%;
+
       display: flex;
+
       overflow: hidden;
     }
 
-    /* 单个“扇面/竹简”方块 */
+
     .panel {
       flex: 1;
+
       height: 100%;
+
       border-right: 1px solid var(--border-color);
+
       position: relative;
+
       overflow: hidden;
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
       padding: 3rem 2.5rem;
-      transition: flex 0.7s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+
+      transition:
+        flex 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.4s ease;
+
       cursor: pointer;
+
       background-color: var(--bg-warm-white);
     }
 
-    /* 悬停时的竹简展开效果：flex 值变大，保持大张开幅 */
+
     .panel:hover {
       flex: 3.5;
+
       background-color: #F4EFF6;
     }
 
-    /* 默认/收拢状态下的纵向标题 */
+
+
+    /* ==================================================
+       COLLAPSED PANEL TITLE
+       ================================================== */
+
+
     .panel-collapsed-title {
       position: absolute;
+
       bottom: 4rem;
       left: 2.5rem;
+
       white-space: nowrap;
+
       transform-origin: left bottom;
+
       transform: rotate(-90deg);
+
       font-family: 'Cormorant Garamond', serif;
+
       font-size: 1.8rem;
+
       letter-spacing: 0.05em;
+
       transition: opacity 0.3s ease;
     }
+
 
     .panel:hover .panel-collapsed-title {
       opacity: 0;
     }
 
-    /* 编号 */
+
+
+    /* ==================================================
+       PANEL NUMBER
+       ================================================== */
+
+
     .panel-num {
       font-size: 0.85rem;
+
       font-weight: 500;
+
       letter-spacing: 0.1em;
+
       color: var(--accent-gray);
     }
 
-    /* 展开后显示的具体内容 */
+
+
+    /* ==================================================
+       EXPANDED CONTENT
+       ================================================== */
+
+
     .panel-content {
       opacity: 0;
+
       transform: translateY(20px);
-      transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+
+      transition:
+        opacity 0.5s ease 0.2s,
+        transform 0.5s ease 0.2s;
+
       display: flex;
+
       flex-direction: column;
+
       height: 100%;
+
       justify-content: space-between;
     }
 
+
     .panel:hover .panel-content {
       opacity: 1;
+
       transform: translateY(0);
     }
 
-    .panel-image-placeholder {
-      width: 100%;
-      height: 220px;
-      background-color: #E8E3DA;
-      margin-top: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      color: var(--accent-gray);
-      text-transform: uppercase;
-    }
 
     .panel-info h2 {
       font-family: 'Cormorant Garamond', serif;
+
       font-size: 2.2rem;
+
       font-weight: 400;
+
       margin-bottom: 0.4rem;
     }
 
+
     .panel-info p.tags {
       font-size: 0.8rem;
+
       color: var(--accent-gray);
+
       letter-spacing: 0.05em;
+
       margin-bottom: 1rem;
+
       text-transform: uppercase;
     }
+
 
     .panel-info p.summary {
       font-size: 0.85rem;
+
       line-height: 1.6;
+
       color: #555;
+
       margin-bottom: 1.5rem;
     }
 
+
+    .project-image {
+      width: 100%;
+
+      height: 220px;
+
+      object-fit: cover;
+
+      margin-top: 1.5rem;
+
+      display: block;
+    }
+
+
+
+    /* ==================================================
+       DETAIL BUTTON
+       ================================================== */
+
+
     .btn-detail {
       display: inline-flex;
+
       align-items: center;
+
       gap: 0.5rem;
+
       font-size: 0.8rem;
+
       text-transform: uppercase;
+
       letter-spacing: 0.15em;
+
       text-decoration: none;
+
       color: var(--text-dark);
+
       font-weight: 500;
+
       border-bottom: 1px solid var(--text-dark);
+
       padding-bottom: 4px;
+
       width: fit-content;
+
+      transition:
+        transform 0.3s ease,
+        letter-spacing 0.3s ease;
     }
+
+
+    .btn-detail:hover {
+      transform: translateX(6px);
+
+      letter-spacing: 0.18em;
+    }
+
+
+
+    /* ==================================================
+       MOBILE
+       ================================================== */
+
 
     @media (max-width: 900px) {
-      .gallery-container { flex-direction: column; overflow: auto; height: auto; }
-      .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
-      .fan-gallery { width: 100%; height: 700px; flex-direction: column; }
-      .panel:hover { flex: 3; }
-      .panel-collapsed-title { transform: none; position: static; }
+
+      body {
+        overflow-y: auto;
+      }
+
+
+      .welcome-screen {
+        padding: 2.3rem 1.6rem;
+      }
+
+
+      .welcome-content h1 {
+        font-size: clamp(3.3rem, 14vw, 5.5rem);
+
+        line-height: 0.92;
+      }
+
+
+      .welcome-description {
+        font-size: 1.25rem;
+      }
+
+
+      .welcome-keywords {
+        gap: 0.6rem 1rem;
+      }
+
+
+      .gallery-container {
+        flex-direction: column;
+
+        overflow: auto;
+
+        height: auto;
+
+        min-height: 100vh;
+      }
+
+
+      .sidebar {
+        width: 100%;
+
+        height: auto;
+
+        min-height: 55vh;
+
+        border-right: none;
+
+        border-bottom: 1px solid var(--border-color);
+      }
+
+
+      .fan-gallery {
+        width: 100%;
+
+        height: 700px;
+
+        flex-direction: column;
+      }
+
+
+      .panel:hover {
+        flex: 3;
+      }
+
+
+      .panel-collapsed-title {
+        transform: none;
+
+        position: static;
+      }
+
     }
+
   </style>
 </head>
+
+
+
 <body>
 
-  <div class="gallery-container">
-    
-    <!-- 左侧：座右铭与品牌哲学 -->
-    <aside class="sidebar">
-      <div class="brand">
-        <h1>ERIN LEI</h1>
-        <p>Portfolio Exhibition</p>
+
+  <!-- ==================================================
+       WELCOME PAGE
+       ================================================== -->
+
+
+  <section
+    id="welcomeScreen"
+    class="welcome-screen"
+  >
+
+
+    <div class="welcome-top">
+
+      <span>01 / Digital Exhibition</span>
+
+      <span>Hobart · Tasmania</span>
+
+    </div>
+
+
+    <div class="welcome-content">
+
+
+      <p class="welcome-small">
+        Welcome to
+      </p>
+
+
+      <h1>
+        ERIN LEI’S<br>
+        PORTFOLIO<br>
+        EXHIBITION
+      </h1>
+
+
+      <div class="welcome-keywords">
+
+        <span>Storytelling</span>
+
+        <span>Audience Experience</span>
+
+        <span>Digital Media</span>
+
+        <span>Creative Communication</span>
+
       </div>
+
+
+      <p class="welcome-description">
+        A collection of selected work in storytelling,
+        audience experience and digital media.
+      </p>
+
+
+    </div>
+
+
+    <button
+      id="enterExhibition"
+      class="enter-btn"
+      type="button"
+    >
+      Begin the Journey →
+    </button>
+
+
+  </section>
+
+
+
+  <!-- ==================================================
+       ORIGINAL PORTFOLIO
+       ================================================== -->
+
+
+  <div class="gallery-container">
+
+
+    <!-- ==================================================
+         LEFT SIDEBAR
+         ================================================== -->
+
+
+    <aside class="sidebar">
+
+
+      <div class="brand">
+
+        <h1>
+          ERIN LEI
+        </h1>
+
+        <p>
+          Portfolio Exhibition
+        </p>
+
+      </div>
+
 
       <div class="motto">
-        “Exploring how audiences perceive, feel, and interpret stories across digital space.”
+
+        “Exploring how audiences perceive, feel,
+        and interpret stories across digital space.”
+
       </div>
+
 
       <div class="sidebar-footer">
-        <p>Media & Communication Student</p>
-        <p>Hobart, Tasmania</p>
+
+        <p>
+          Media & Communication Student
+        </p>
+
+        <p>
+          Hobart, Tasmania
+        </p>
+
       </div>
+
+
     </aside>
 
-    <!-- 右侧：“竹简/折扇”平移展区 -->
+
+
+    <!-- ==================================================
+         RIGHT — FAN GALLERY
+         ================================================== -->
+
+
     <main class="fan-gallery">
-      
-      <!-- 项目 01 -->
+
+
+
+      <!-- ==================================================
+           PROJECT 01
+           ================================================== -->
+
+
       <article class="panel">
-        <span class="panel-num">01</span>
-        <div class="panel-collapsed-title">A SPRING FOOD BAR</div>
-        
-        <div class="panel-content">
-          <div class="panel-info">
-            <h2>A Spring Food Bar</h2>
-            <p class="tags">Digital & Social Media Marketing</p>
-            <p class="summary">An audience-focused digital marketing project combining strategic analysis, communication planning, and promotional video production.</p>
-            <img src="unnamed.webp" alt="A Spring Food Bar" style="width: 100%; height: 220px; object-fit: cover; margin-top: 1.5rem; display: block;">
-          </div>
-          <a href="projects/spring-food-bar.html" class="btn-detail">Explore Case Study →</a>
+
+
+        <span class="panel-num">
+          01
+        </span>
+
+
+        <div class="panel-collapsed-title">
+          A SPRING FOOD BAR
         </div>
+
+
+        <div class="panel-content">
+
+
+          <div class="panel-info">
+
+
+            <h2>
+              A Spring Food Bar
+            </h2>
+
+
+            <p class="tags">
+              Digital & Social Media Marketing
+            </p>
+
+
+            <p class="summary">
+
+              An audience-focused digital marketing project
+              combining strategic analysis, communication
+              planning, and promotional video production.
+
+            </p>
+
+
+            <img
+              src="unnamed.webp"
+              alt="A Spring Food Bar"
+              class="project-image"
+            >
+
+
+          </div>
+
+
+          <a
+            href="projects/spring-food-bar.html"
+            class="btn-detail transition-link"
+          >
+            Explore Case Study →
+          </a>
+
+
+        </div>
+
+
       </article>
 
-      <!-- 项目 02 -->
+
+
+      <!-- ==================================================
+           PROJECT 02
+           ================================================== -->
+
+
       <article class="panel">
-        <span class="panel-num">02</span>
-        <div class="panel-collapsed-title">GREAT SOUTHERN REEF</div>
-        
-        <div class="panel-content">
-          <div class="panel-info">
-            <h2>Great Southern Reef</h2>
-            <p class="tags">Science Communication & Storytelling</p>
-            <p class="summary">A science communication project exploring how visual and character-based storytelling can make environmental information engaging.</p>
-            <img src="Great-Southern-Reef-Photo-John-Turnbull.webp" alt="Great Southern Reef" style="width: 100%; height: 220px; object-fit: cover; margin-top: 1.5rem; display: block;">
-          </div>
-          <a href="projects/great-southern-reef.html" class="btn-detail">Explore Case Study →</a>
+
+
+        <span class="panel-num">
+          02
+        </span>
+
+
+        <div class="panel-collapsed-title">
+          GREAT SOUTHERN REEF
         </div>
+
+
+        <div class="panel-content">
+
+
+          <div class="panel-info">
+
+
+            <h2>
+              Great Southern Reef
+            </h2>
+
+
+            <p class="tags">
+              Science Communication & Storytelling
+            </p>
+
+
+            <p class="summary">
+
+              A science communication project exploring how
+              visual and character-based storytelling can make
+              environmental information engaging.
+
+            </p>
+
+
+            <img
+              src="Great-Southern-Reef-Photo-John-Turnbull.webp"
+              alt="Great Southern Reef"
+              class="project-image"
+            >
+
+
+          </div>
+
+
+          <a
+            href="projects/great-southern-reef.html"
+            class="btn-detail transition-link"
+          >
+            Explore Case Study →
+          </a>
+
+
+        </div>
+
+
       </article>
 
-      <!-- 项目 03 -->
+
+
+      <!-- ==================================================
+           PROJECT 03
+           ================================================== -->
+
+
       <article class="panel">
-        <span class="panel-num">03</span>
-        <div class="panel-collapsed-title">PETRESCUE</div>
-        
-        <div class="panel-content">
-          <div class="panel-info">
-            <h2>PetRescue</h2>
-            <p class="tags">Public Relations & Media Communication</p>
-            <p class="summary">A professional digital media kit designed to organise campaign information into clear, accessible materials for media audiences.</p>
-            <img src="petnew.png" alt="PetRescue" style="width: 100%; height: 220px; object-fit: cover; margin-top: 1.5rem; display: block;">
-          </div>
-          <a href="projects/petrescue.html" class="btn-detail">Explore Case Study →</a>
+
+
+        <span class="panel-num">
+          03
+        </span>
+
+
+        <div class="panel-collapsed-title">
+          PETRESCUE
         </div>
+
+
+        <div class="panel-content">
+
+
+          <div class="panel-info">
+
+
+            <h2>
+              PetRescue
+            </h2>
+
+
+            <p class="tags">
+              Public Relations & Media Communication
+            </p>
+
+
+            <p class="summary">
+
+              A professional digital media kit designed to
+              organise campaign information into clear,
+              accessible materials for media audiences.
+
+            </p>
+
+
+            <img
+              src="petnew.png"
+              alt="PetRescue"
+              class="project-image"
+            >
+
+
+          </div>
+
+
+          <a
+            href="projects/petrescue.html"
+            class="btn-detail transition-link"
+          >
+            Explore Case Study →
+          </a>
+
+
+        </div>
+
+
       </article>
+
 
     </main>
 
+
   </div>
 
+
+
+  <!-- ==================================================
+       JAVASCRIPT
+       ================================================== -->
+
+
+  <script>
+
+
+    /* ==================================================
+       WELCOME SCREEN
+       ================================================== */
+
+
+    const welcomeScreen =
+      document.getElementById('welcomeScreen');
+
+
+    const enterButton =
+      document.getElementById('enterExhibition');
+
+
+    const alreadyEntered =
+      sessionStorage.getItem('erinPortfolioEntered');
+
+
+    /*
+      已经进入过：
+      不显示 Welcome。
+    */
+
+    if (alreadyEntered === 'true') {
+
+      document.documentElement
+        .classList.remove('show-welcome');
+
+      document.documentElement
+        .classList.add('skip-welcome');
+
+    }
+
+
+
+    /*
+      第一次点击 Begin the Journey
+    */
+
+    enterButton.addEventListener(
+      'click',
+      function () {
+
+
+        sessionStorage.setItem(
+          'erinPortfolioEntered',
+          'true'
+        );
+
+
+        /*
+          Welcome 向左走
+        */
+
+        welcomeScreen.classList.add('leave');
+
+
+        /*
+          Portfolio 从右边进入
+        */
+
+        document.documentElement
+          .classList.remove('show-welcome');
+
+        document.documentElement
+          .classList.add('entered-exhibition');
+
+
+        /*
+          动画完成后真正隐藏 Welcome
+        */
+
+        setTimeout(() => {
+
+          welcomeScreen.style.display = 'none';
+
+          document.documentElement
+            .classList.remove('entered-exhibition');
+
+          document.documentElement
+            .classList.add('skip-welcome');
+
+        }, 1050);
+
+
+      }
+    );
+
+
+
+    /* ==================================================
+       PROJECT PAGE TRANSITION
+       ================================================== */
+
+
+    const transitionLinks =
+      document.querySelectorAll(
+        '.transition-link'
+      );
+
+
+    transitionLinks.forEach(link => {
+
+
+      link.addEventListener(
+        'click',
+        function (event) {
+
+
+          /*
+            防止链接立刻跳走。
+          */
+
+          event.preventDefault();
+
+
+          const destination =
+            this.href;
+
+
+          /*
+            整个首页向左滑。
+          */
+
+          document.body
+            .classList.add('page-leaving');
+
+
+          /*
+            等动画完成再真正进入项目页面。
+          */
+
+          setTimeout(() => {
+
+            window.location.href =
+              destination;
+
+          }, 850);
+
+
+        }
+      );
+
+
+    });
+
+
+
+    /* ==================================================
+       BROWSER BACK SUPPORT
+       ================================================== */
+
+
+    /*
+      如果浏览器使用 Back 按钮回到首页，
+      清除之前的离场 class。
+    */
+
+    window.addEventListener(
+      'pageshow',
+      function () {
+
+        document.body
+          .classList.remove('page-leaving');
+
+      }
+    );
+
+
+  </script>
+
+
 </body>
+
 </html>
