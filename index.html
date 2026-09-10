@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erin Lei — Portfolio Exhibition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-warm-white: #FAF7F2;
+      --text-dark: #1A1A1A;
+      --border-color: #E2DDD5;
+      --accent-gray: #757471;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-warm-white);
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .gallery-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* 左侧：静态品牌与 Personal Quote 展厅 */
+    .sidebar {
+      width: 32%;
+      height: 100%;
+      border-right: 1px solid var(--border-color);
+      padding: 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: var(--bg-warm-white);
+      z-index: 2;
+    }
+
+    .brand h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .brand p {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent-gray);
+      margin-top: 0.8rem;
+    }
+
+    .motto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      line-height: 1.4;
+      font-style: italic;
+      color: #333;
+      max-width: 85%;
+    }
+
+    .sidebar-footer {
+      font-size: 0.8rem;
+      color: var(--accent-gray);
+      line-height: 1.6;
+    }
+
+    /* 右侧：“竹简/折扇”平移展区 */
+    .fan-gallery {
+      width: 68%;
+      height: 100%;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* 单个“扇面/竹简”方块 */
+    .panel {
+      flex: 1;
+      height: 100%;
+      border-right: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem 2.5rem;
+      transition: flex 0.7s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+      cursor: pointer;
+      background-color: var(--bg-warm-white);
+    }
+
+    /* 悬停时的竹简展开效果：flex 值变大，保持大张开幅 */
+    .panel:hover {
+      flex: 3.5;
+      background-color: #F4EFF6;
+    }
+
+    /* 默认/收拢状态下的纵向标题 */
+    .panel-collapsed-title {
+      position: absolute;
+      bottom: 4rem;
+      left: 2.5rem;
+      white-space: nowrap;
+      transform-origin: left bottom;
+      transform: rotate(-90deg);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      transition: opacity 0.3s ease;
+    }
+
+    .panel:hover .panel-collapsed-title {
+      opacity: 0;
+    }
+
+    /* 编号 */
+    .panel-num {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--accent-gray);
+    }
+
+    /* 展开后显示的具体内容 */
+    .panel-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    .panel:hover .panel-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .panel-image-placeholder {
+      width: 100%;
+      height: 220px;
+      background-color: #E8E3DA;
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--accent-gray);
+      text-transform: uppercase;
+    }
+
+    .panel-info h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+
+    .panel-info p.tags {
+      font-size: 0.8rem;
+      color: var(--accent-gray);
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .panel-info p.summary {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-detail {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      border-bottom: 1px solid var(--text-dark);
+      padding-bottom: 4px;
+      width: fit-content;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-container { flex-direction: column; overflow: auto; height: auto; }
+      .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
+      .fan-gallery { width: 100%; height: 700px; flex-direction: column; }
+      .panel:hover { flex: 3; }
+      .panel-collapsed-title { transform: none; position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gallery-container">
+    
+    <!-- 左侧：座右铭与品牌哲学 -->
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>ERIN LEI</h1>
+        <p>Portfolio Exhibition</p>
+      </div>
+
+      <div class="motto">
+        “Exploring how audiences perceive, feel, and interpret stories across digital space.”
+      </div>
+
+      <div class="sidebar-footer">
+        <p>Media & Communication Student</p>
+        <p>Hobart, Tasmania</p>
+      </div>
+    </aside>
+
+    <!-- 右侧：“竹简/折扇”平移展区 -->
+    <main class="fan-gallery">
+      
+      <!-- 项目 01 -->
+      <article class="panel">
+        <span class="panel-num">01</span>
+        <div class="panel-collapsed-title">A SPRING FOOD BAR</div>
+        
+        <div class="panel-content">
+          <div class="panel-info">
+            <h2>A Spring Food Bar</h2>
+            <p class="tags">Digital & Social Media Marketing</p>
+            <p class="summary">An audience-focused digital marketing project combining strategic analysis, communication planning, and promotional video production.</p>
+            <div class="panel-image-placeholder">[ Visual / Still Preview ]</div>
+          </div>
+          <a href="projects/spring-food-bar.html" class="btn-detail">Explore Case Study →</a>
+        </div>
+      </article>
+
+      <!-- 项目 02 -->
+      <article class="panel">
+        <span class="panel-num">02</span>
+        <div class="panel-collapsed-title">GREAT SOUTHERN REEF</div>
+        
+        <div class="panel-content">
+          <div class="panel-info">
+            <h2>Great Southern Reef</h2>
+            <p class="tags">Science Communication & Storytelling</p>
+            <p class="summary">A science communication project exploring how visual and character-based storytelling can make environmental information engaging.</p>
+            <div class="panel-image-placeholder">[ Instagram / Wendy Visual ]</div>
+          </div>
+          <a href="projects/great-southern-reef.html" class="btn-detail">Explore Case Study →</a>
+        </div>
+      </article>
+
+      <!-- 项目 03 -->
+      <article class="panel">
+        <span class="panel-num">03</span>
+        <div class="panel-collapsed-title">PETRESCUE</div>
+        
+        <div class="panel-content">
+          <div class="panel-info">
+            <h2>PetRescue</h2>
+            <p class="tags">Public Relations & Media Communication</p>
+            <p class="summary">A professional digital media kit designed to organise campaign information into clear, accessible materials for media audiences.</p>
+            <div class="panel-image-placeholder">[ Media Kit Document Mockup ]</div>
+          </div>
+          <a href="projects/petrescue.html" class="btn-detail">Explore Case Study →</a>
+        </div>
+      </article>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

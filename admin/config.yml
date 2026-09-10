@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "projects"
+    label: "作品项目"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "项目编号 (如 01, 04)", name: "number", widget: "string" }
+      - { label: "项目标题", name: "title", widget: "string" }
+      - { label: "项目分类/关键词", name: "category", widget: "string" }
+      - { label: "首页折扇简述", name: "summary", widget: "text" }
+      - { label: "封面图片/Preview", name: "coverImage", widget: "image" }
+      - { label: "宣传视频 (可选)", name: "video", widget: "file", required: false }
+      - { label: "The Challenge (传播挑战)", name: "challenge", widget: "markdown", required: false }
+      - { label: "Audience Analysis (受众分析)", name: "audience", widget: "markdown", required: false }
+      - { label: "Strategy & Process (策略与过程)", name: "strategy", widget: "markdown", required: false }
+      - { label: "Final Work (成果展示)", name: "finalWork", widget: "markdown", required: false }
