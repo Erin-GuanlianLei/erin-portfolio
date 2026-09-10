@@ -40,6 +40,51 @@
       color: var(--text-dark);
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
+
+      /* 页面切换新增 */
+      overflow-x: hidden;
+      animation: projectPageEnter 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+
+    /* =========================
+       PAGE TRANSITION
+       ========================= */
+
+    @keyframes projectPageEnter {
+
+      from {
+        opacity: 0;
+        transform: translateX(10vw);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+    }
+
+    body.page-leave-back {
+      animation:
+        projectPageLeaveBack
+        0.8s
+        cubic-bezier(0.76, 0, 0.24, 1)
+        forwards;
+    }
+
+    @keyframes projectPageLeaveBack {
+
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateX(12vw);
+      }
+
     }
 
 
@@ -267,7 +312,7 @@
       background-color: #000;
 
       box-shadow:
-        0 24px 55px rgba(0, 0, 0, 0.13);
+        0 24px 55px rgba(0,0,0,0.13);
 
     }
 
@@ -457,7 +502,10 @@
 
   <header>
 
-    <a href="../index.html" class="back-link">
+    <a
+      href="../index.html"
+      class="back-link back-transition"
+    >
       ← Back to Portfolio
     </a>
 
@@ -793,6 +841,67 @@
       }
 
     });
+
+
+    /* =========================
+       BACK TO PORTFOLIO TRANSITION
+       ========================= */
+
+    const backTransition =
+      document.querySelector('.back-transition');
+
+
+    if (backTransition) {
+
+      backTransition.addEventListener(
+        'click',
+        function (event) {
+
+          event.preventDefault();
+
+          const destination = this.href;
+
+          /*
+            当前 Project 页面向右离场
+          */
+
+          document.body.classList.add(
+            'page-leave-back'
+          );
+
+          /*
+            动画结束后回首页
+          */
+
+          setTimeout(() => {
+
+            window.location.href =
+              destination;
+
+          }, 760);
+
+        }
+      );
+
+    }
+
+
+    /*
+      如果通过浏览器的 Back 按钮重新回到这一页，
+      清除离场状态。
+    */
+
+    window.addEventListener(
+      'pageshow',
+      function () {
+
+        document.body.classList.remove(
+          'page-leave-back'
+        );
+
+      }
+    );
+
 
   </script>
 
