@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PetRescue Media Kit — Exhibition | Erin Lei</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root {
+      --bg-warm-white: #FAF7F2;
+      --text-dark: #1A1A1A;
+      --border-color: #E2DDD5;
+      --accent-gray: #757471;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-warm-white);
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+
+    /* =========================
+       TOP NAVIGATION
+       ========================= */
+
+    header {
+      padding: 2rem 4rem;
+
+      border-bottom: 1px solid var(--border-color);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+
+      background-color: rgba(250, 247, 242, 0.96);
+
+      position: sticky;
+      top: 0;
+
+      z-index: 10;
+
+      backdrop-filter: blur(10px);
+    }
+
+    .back-link {
+      font-size: 0.8rem;
+
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+
+      text-decoration: none;
+
+      color: var(--text-dark);
+
+      font-weight: 500;
+
+      border-bottom: 1px solid var(--text-dark);
+
+      padding-bottom: 2px;
+    }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 1.2rem;
+
+      letter-spacing: -0.01em;
+
+      text-align: right;
+    }
+
+
+    /* =========================
+       MAIN PAGE
+       ========================= */
+
+    .exhibition-main {
+      max-width: 980px;
+
+      margin: 0 auto;
+
+      padding: 5rem 2rem 7rem;
+
+      width: 100%;
+    }
+
+
+    /* =========================
+       PROJECT INTRODUCTION
+       ========================= */
+
+    .exhibition-header {
+      text-align: center;
+
+      margin: 0 auto 4.5rem;
+
+      max-width: 680px;
+    }
+
+    .eyebrow {
+      margin-bottom: 1rem;
+
+      font-size: 0.75rem;
+
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+
+      color: var(--accent-gray);
+    }
+
+    .exhibition-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: clamp(2.7rem, 6vw, 4.4rem);
+
+      font-weight: 400;
+
+      line-height: 1.05;
+
+      margin-bottom: 1.2rem;
+    }
+
+    .exhibition-header p {
+      font-size: 0.95rem;
+
+      line-height: 1.7;
+
+      color: var(--accent-gray);
+
+      margin: 0 auto 2rem;
+
+      max-width: 610px;
+    }
+
+
+    /* =========================
+       DOWNLOAD BUTTON
+       ========================= */
+
+    .btn-download {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 0.8rem;
+
+      background-color: var(--text-dark);
+
+      color: var(--bg-warm-white);
+
+      padding: 0.95rem 1.8rem;
+
+      text-decoration: none;
+
+      font-size: 0.78rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.15em;
+
+      font-weight: 500;
+
+      transition:
+        transform 0.25s ease,
+        background-color 0.25s ease;
+    }
+
+    .btn-download:hover {
+      background-color: #333;
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       PDF PAGE EXHIBITION
+       ========================= */
+
+    .pdf-pages-container {
+      width: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 4rem;
+    }
+
+    .pdf-page-card {
+      width: 100%;
+
+      margin: 0;
+
+      padding: 1.4rem 1.4rem 1rem;
+
+      background: #fff;
+
+      border: 1px solid var(--border-color);
+
+      box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.045);
+    }
+
+    .page-image-button {
+      display: block;
+
+      width: 100%;
+
+      border: 0;
+
+      background: transparent;
+
+      padding: 0;
+
+      cursor: zoom-in;
+    }
+
+    .pdf-page-card img {
+      display: block;
+
+      width: 100%;
+
+      height: auto;
+
+      object-fit: contain;
+
+      background: #fff;
+    }
+
+    .page-number {
+      display: block;
+
+      margin-top: 1rem;
+
+      text-align: center;
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 1rem;
+
+      letter-spacing: 0.15em;
+
+      color: var(--accent-gray);
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================
+       LIGHTBOX
+       ========================= */
+
+    .lightbox {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 100;
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 2rem;
+
+      background: rgba(15, 15, 15, 0.94);
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: min(94vw, 1500px);
+
+      max-height: 90vh;
+
+      width: auto;
+
+      height: auto;
+
+      object-fit: contain;
+
+      box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.35);
+
+      background: #fff;
+    }
+
+    .lightbox-close {
+      position: fixed;
+
+      top: 1.25rem;
+
+      right: 1.5rem;
+
+      border: 0;
+
+      background: transparent;
+
+      color: #fff;
+
+      font-family: 'Inter', sans-serif;
+
+      font-size: 2rem;
+
+      line-height: 1;
+
+      cursor: pointer;
+    }
+
+    .lightbox-label {
+      position: fixed;
+
+      left: 50%;
+
+      bottom: 1rem;
+
+      transform: translateX(-50%);
+
+      color: rgba(255, 255, 255, 0.78);
+
+      font-size: 0.75rem;
+
+      letter-spacing: 0.15em;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 768px) {
+
+      header {
+        padding: 1.4rem 1.5rem;
+      }
+
+      .brand-title {
+        font-size: 1rem;
+      }
+
+      .exhibition-main {
+        padding: 3.5rem 1rem 5rem;
+      }
+
+      .exhibition-header {
+        margin-bottom: 3rem;
+      }
+
+      .pdf-pages-container {
+        gap: 2rem;
+      }
+
+      .pdf-page-card {
+        padding: 0.65rem 0.65rem 0.8rem;
+      }
+
+      .lightbox {
+        padding: 0.75rem;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       TOP NAVIGATION
+       ========================= -->
+
+  <header>
+
+    <a href="../index.html" class="back-link">
+      ← Back to Portfolio
+    </a>
+
+    <div class="brand-title">
+      Erin Lei — Document Exhibition
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       MAIN CONTENT
+       ========================= -->
+
+  <main class="exhibition-main">
+
+
+    <!-- PROJECT INTRODUCTION -->
+
+    <section class="exhibition-header">
+
+      <div class="eyebrow">
+        Public Relations · Digital Media Kit
+      </div>
+
+      <h1>
+        PetRescue<br>
+        Best Friends’ Walk 2025
+      </h1>
+
+      <p>
+        A 15-page media kit developed for PetRescue’s Best Friends’
+        Walk 2025, bringing together media relations writing,
+        campaign information, fact-sheet content and spokesperson
+        profiles in one visual document.
+      </p>
+
+      <a
+        href="./petrescue-media-kit.pdf"
+        download="PetRescue-Best-Friends-Walk-2025-Media-Kit.pdf"
+        class="btn-download"
+      >
+        ↓ Download Original PDF
+      </a>
+
+    </section>
+
+
+    <!-- =========================
+         PDF PAGES
+         ========================= -->
+
+    <section
+      class="pdf-pages-container"
+      aria-label="PetRescue media kit pages"
+    >
+
+
+      <!-- PAGE 01 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 01 in full view"
+          onclick="openLightbox(
+            './petrescue-page-01.jpg',
+            'Page 01'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-01.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 01"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 01 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 02 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 02 in full view"
+          onclick="openLightbox(
+            './petrescue-page-02.jpg',
+            'Page 02'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-02.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 02"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 02 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 03 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 03 in full view"
+          onclick="openLightbox(
+            './petrescue-page-03.jpg',
+            'Page 03'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-03.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 03"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 03 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 04 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 04 in full view"
+          onclick="openLightbox(
+            './petrescue-page-04.jpg',
+            'Page 04'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-04.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 04"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 04 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 05 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 05 in full view"
+          onclick="openLightbox(
+            './petrescue-page-05.jpg',
+            'Page 05'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-05.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 05"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 05 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 06 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 06 in full view"
+          onclick="openLightbox(
+            './petrescue-page-06.jpg',
+            'Page 06'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-06.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 06"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 06 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 07 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 07 in full view"
+          onclick="openLightbox(
+            './petrescue-page-07.jpg',
+            'Page 07'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-07.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 07"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 07 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 08 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 08 in full view"
+          onclick="openLightbox(
+            './petrescue-page-08.jpg',
+            'Page 08'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-08.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 08"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 08 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 09 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 09 in full view"
+          onclick="openLightbox(
+            './petrescue-page-09.jpg',
+            'Page 09'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-09.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 09"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 09 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 10 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 10 in full view"
+          onclick="openLightbox(
+            './petrescue-page-10.jpg',
+            'Page 10'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-10.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 10"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 10 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 11 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 11 in full view"
+          onclick="openLightbox(
+            './petrescue-page-11.jpg',
+            'Page 11'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-11.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 11"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 11 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 12 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 12 in full view"
+          onclick="openLightbox(
+            './petrescue-page-12.jpg',
+            'Page 12'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-12.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 12"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 12 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 13 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 13 in full view"
+          onclick="openLightbox(
+            './petrescue-page-13.jpg',
+            'Page 13'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-13.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 13"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 13 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 14 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 14 in full view"
+          onclick="openLightbox(
+            './petrescue-page-14.jpg',
+            'Page 14'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-14.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 14"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 14 —
+        </figcaption>
+
+      </figure>
+
+
+      <!-- PAGE 15 -->
+
+      <figure class="pdf-page-card">
+
+        <button
+          class="page-image-button"
+          type="button"
+          aria-label="Open page 15 in full view"
+          onclick="openLightbox(
+            './petrescue-page-15.jpg',
+            'Page 15'
+          )"
+        >
+
+          <img
+            src="./petrescue-page-15.jpg"
+            alt="PetRescue Best Friends’ Walk 2025 Media Kit — Page 15"
+            loading="lazy"
+          >
+
+        </button>
+
+        <figcaption class="page-number">
+          — Page 15 —
+        </figcaption>
+
+      </figure>
+
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       LIGHTBOX
+       ========================= -->
+
+  <div
+    class="lightbox"
+    id="lightbox"
+    aria-hidden="true"
+    onclick="closeLightbox(event)"
+  >
+
+    <button
+      class="lightbox-close"
+      type="button"
+      aria-label="Close"
+      onclick="closeLightbox(event)"
+    >
+      ×
+    </button>
+
+    <img
+      id="lightboxImage"
+      src=""
+      alt=""
+    >
+
+    <div
+      class="lightbox-label"
+      id="lightboxLabel"
+    ></div>
+
+  </div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
+
+  <script>
+
+    const lightbox =
+      document.getElementById('lightbox');
+
+    const lightboxImage =
+      document.getElementById('lightboxImage');
+
+    const lightboxLabel =
+      document.getElementById('lightboxLabel');
+
+
+    function openLightbox(src, label) {
+
+      lightboxImage.src = src;
+
+      lightboxImage.alt = label;
+
+      lightboxLabel.textContent = label;
+
+      lightbox.classList.add('active');
+
+      lightbox.setAttribute(
+        'aria-hidden',
+        'false'
+      );
+
+      document.body.style.overflow = 'hidden';
+
+    }
+
+
+    function closeLightbox(event) {
+
+      if (
+        event.target === lightbox ||
+        event.target.classList.contains(
+          'lightbox-close'
+        )
+      ) {
+
+        lightbox.classList.remove('active');
+
+        lightbox.setAttribute(
+          'aria-hidden',
+          'true'
+        );
+
+        lightboxImage.src = '';
+
+        document.body.style.overflow = '';
+
+      }
+
+    }
+
+
+    document.addEventListener(
+      'keydown',
+      (event) => {
+
+        if (
+          event.key === 'Escape' &&
+          lightbox.classList.contains('active')
+        ) {
+
+          lightbox.classList.remove('active');
+
+          lightbox.setAttribute(
+            'aria-hidden',
+            'true'
+          );
+
+          lightboxImage.src = '';
+
+          document.body.style.overflow = '';
+
+        }
+
+      }
+    );
+
+  </script>
+
+
+</body>
+</html>
