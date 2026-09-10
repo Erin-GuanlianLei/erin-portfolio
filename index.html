@@ -597,80 +597,210 @@
        ================================================== */
 
 
-    @media (max-width: 900px) {
+@media (max-width: 900px) {
 
-      body {
-        overflow-y: auto;
-      }
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+  }
 
-
-      .welcome-screen {
-        padding: 2.3rem 1.6rem;
-      }
-
-
-      .welcome-content h1 {
-        font-size: clamp(3.3rem, 14vw, 5.5rem);
-
-        line-height: 0.92;
-      }
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 
 
-      .welcome-description {
-        font-size: 1.25rem;
-      }
+  /* =========================
+     WELCOME PAGE
+     ========================= */
+
+  .welcome-screen {
+    padding: 2.3rem 1.6rem;
+    min-height: 100svh;
+    height: 100svh;
+  }
+
+  .welcome-content h1 {
+    font-size: clamp(3.3rem, 14vw, 5.5rem);
+    line-height: 0.92;
+  }
+
+  .welcome-description {
+    font-size: 1.25rem;
+  }
+
+  .welcome-keywords {
+    gap: 0.6rem 1rem;
+  }
 
 
-      .welcome-keywords {
-        gap: 0.6rem 1rem;
-      }
+  /* =========================
+     MAIN PORTFOLIO
+     ========================= */
+
+  .gallery-container {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
 
 
-      .gallery-container {
-        flex-direction: column;
+  /* Erin Lei introduction */
 
-        overflow: auto;
+  .sidebar {
+    width: 100%;
+    height: auto;
+    min-height: 70svh;
 
-        height: auto;
+    padding: 3rem 1.6rem;
 
-        min-height: 100vh;
-      }
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
 
+  .brand h1 {
+    font-size: 3rem;
+  }
 
-      .sidebar {
-        width: 100%;
-
-        height: auto;
-
-        min-height: 55vh;
-
-        border-right: none;
-
-        border-bottom: 1px solid var(--border-color);
-      }
-
-
-      .fan-gallery {
-        width: 100%;
-
-        height: 700px;
-
-        flex-direction: column;
-      }
+  .motto {
+    max-width: 100%;
+    margin: 5rem 0;
+  }
 
 
-      .panel:hover {
-        flex: 3;
-      }
+  /* =========================
+     PROJECTS
+     ========================= */
+
+  .fan-gallery {
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    overflow: visible;
+  }
 
 
-      .panel-collapsed-title {
-        transform: none;
+  /*
+    手机不再依赖 hover。
+    每一个项目直接完整显示。
+  */
 
-        position: static;
-      }
+  .panel {
+    width: 100%;
+    height: auto;
+    min-height: auto;
 
-    }
+    display: block;
+
+    padding: 3rem 1.6rem;
+
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+
+    cursor: default;
+  }
+
+
+  /*
+    禁止桌面 hover 的 flex 展开效果
+  */
+
+  .panel:hover {
+    flex: none;
+  }
+
+
+  /*
+    手机直接隐藏竖着的标题，
+    因为正式标题已经直接显示。
+  */
+
+  .panel-collapsed-title {
+    display: none;
+  }
+
+
+  /*
+    最重要：
+    手机端项目内容永远可见，
+    不再等待 hover。
+  */
+
+  .panel-content {
+    opacity: 1;
+    transform: none;
+
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+
+    gap: 2rem;
+  }
+
+
+  .panel:hover .panel-content {
+    opacity: 1;
+    transform: none;
+  }
+
+
+  .panel-num {
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+
+  .panel-info h2 {
+    font-size: 2.4rem;
+  }
+
+
+  .panel-info p.summary {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+
+  .project-image {
+    width: 100%;
+    height: auto;
+
+    max-height: 320px;
+
+    object-fit: cover;
+
+    margin-top: 1.5rem;
+  }
+
+
+  /*
+    Explore Case Study 在手机上成为真正
+    清楚、容易点击的按钮区域
+  */
+
+  .btn-detail {
+    display: inline-flex;
+
+    width: fit-content;
+
+    padding: 0.7rem 0;
+
+    font-size: 0.8rem;
+
+    position: relative;
+
+    z-index: 20;
+
+    touch-action: manipulation;
+  }
+
+}
 
   </style>
 </head>
