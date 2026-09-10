@@ -1,465 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Great Southern Reef — Case Study</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg-warm-white: #FAF7F2;
-      --text-dark: #1A1A1A;
-      --border-color: #E2DDD5;
-      --accent-gray: #757471;
-      --accent-subtle: #F4EFF6;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Great Southern Reef — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-warm-white: #FAF7F2;
+--text-dark: #1A1A1A;
+--border-color: #E2DDD5;
+--accent-gray: #757471;
+--accent-subtle: #F4EFF6;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+body {
+  background-color: var(--bg-warm-white);
+  color: var(--text-dark);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  padding: 4rem 2rem;
+}
 
-    body {
-      background-color: var(--bg-warm-white);
-      color: var(--text-dark);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      padding: 4rem 2rem;
-    }
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+.back-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  color: var(--accent-gray);
+  margin-bottom: 2rem;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
 
-    .back-link {
-      display: inline-block;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      text-decoration: none;
-      color: var(--accent-gray);
-      margin-bottom: 2rem;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
+.back-link:hover {
+  border-color: var(--text-dark);
+  color: var(--text-dark);
+}
 
-    .back-link:hover {
-      border-color: var(--text-dark);
-      color: var(--text-dark);
-    }
+header.case-header {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 2rem;
+}
 
-    header.case-header {
-      margin-bottom: 3rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 2rem;
-    }
+header.case-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
 
-    header.case-header h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
+header.case-header .tags {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-gray);
+}
 
-    header.case-header .tags {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gray);
-    }
+section {
+  margin-bottom: 4rem;
+}
 
-    section {
-      margin-bottom: 4rem;
-    }
+h2.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
 
-    h2.section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.5rem;
-    }
+p {
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+  color: #333;
+}
 
-    p {
-      margin-bottom: 1.2rem;
-      font-size: 0.95rem;
-      color: #333;
-    }
+/* 现代感 Instagram 轮播图样式 */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  background: #E8E3DA;
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
 
-    /* 现代感 Instagram 轮播图样式 */
-    .carousel-container {
-      position: relative;
-      overflow: hidden;
-      background: #E8E3DA;
-      border-radius: 4px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 1rem;
+}
 
-    .carousel-track {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      padding-bottom: 1rem;
-    }
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
 
-    .carousel-track::-webkit-scrollbar {
-      display: none;
-    }
+.carousel-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  background: #FFFFFF;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--accent-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+}
 
-    .carousel-slide {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-      background: var(--bg-warm-white);
-      height: 350px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border-color);
-      font-size: 0.9rem;
-      color: var(--accent-gray);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      position: relative;
-    }
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.carousel-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
 
-    .carousel-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1rem;
-    }
+.carousel-btn {
+  background: none;
+  border: 1px solid var(--text-dark);
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
 
-    .carousel-btn {
-      background: none;
-      border: 1px solid var(--text-dark);
-      padding: 0.4rem 1rem;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      transition: background 0.3s, color 0.3s;
-    }
+.carousel-btn:hover {
+  background: var(--text-dark);
+  color: var(--bg-warm-white);
+}
 
-    .carousel-btn:hover {
-      background: var(--text-dark);
-      color: var(--bg-warm-white);
-    }
+/* 翻页书本组件样式 (Book Reader for Script) */
+.book-container {
+  background: #FFF;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
 
-    /* 翻页书本组件样式 (Book Reader for Script) */
-    .book-container {
-      background: #FFF;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      padding: 3rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-    }
+.book-page {
+  display: none;
+  min-height: 450px;
+  animation: fadeIn 0.5s ease;
+}
 
-    .book-page {
-      display: none;
-      min-height: 450px;
-      animation: fadeIn 0.5s ease;
-    }
+.book-page.active {
+  display: block;
+}
 
-    .book-page.active {
-      display: block;
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.script-content {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  background: #FAFAFA;
+  padding: 2rem;
+  border-left: 3px solid var(--text-dark);
+  max-height: 450px;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
 
-    .script-content {
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.85rem;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      background: #FAFAFA;
-      padding: 2rem;
-      border-left: 3px solid var(--text-dark);
-      max-height: 450px;
-      overflow-y: auto;
-      margin-top: 1rem;
-    }
+.book-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
 
-    .book-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 2rem;
-      border-top: 1px solid var(--border-color);
-      padding-top: 1rem;
-    }
+.page-indicator {
+  font-size: 0.85rem;
+  color: var(--accent-gray);
+  letter-spacing: 0.1em;
+}
 
-    .page-indicator {
-      font-size: 0.85rem;
-      color: var(--accent-gray);
-      letter-spacing: 0.1em;
-    }
-
-    /* 贡献表格样式 */
-    table.contrib-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-    }
-
-    table.contrib-table th, table.contrib-table td {
-      border: 1px solid var(--border-color);
-      padding: 0.75rem;
-      text-align: left;
-    }
-
-    table.contrib-table th {
-      background: var(--accent-subtle);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    @media (max-width: 768px) {
-      header.case-header h1 { font-size: 2.5rem; }
-      .book-container { padding: 1.5rem; }
-    }
-  </style>
+@media (max-width: 768px) {
+  header.case-header h1 { font-size: 2.5rem; }
+  .book-container { padding: 1.5rem; }
+}
+</style>
 </head>
 <body>
+<div class="container">
+<a href="../index.html" class="back-link">← Back to Exhibition</a>
+<header class="case-header">
+  <h1>Great Southern Reef</h1>
+  <p class="tags">Science Communication & Storytelling | Total Word Count: 2,516 words</p>
+</header>
 
-  <div class="container">
-    <a href="../index.html" class="back-link">← Back to Exhibition</a>
+<!-- 战略背景部分 -->
+<section>
+  <h2 class="section-title">Communication Strategy & Overview</h2>
+  <p>As part of the broader communication strategy, the social media component positions tourists as active participants in Great Southern Reef experiences, encouraging engagement through food, diving, and related activities.</p>
+  <p>This communication strategy uses two complementary social media platforms, Instagram and TikTok, to engage different audience groups with the Great Southern Reef (GSR).</p>
+  
+  <p><strong>Instagram Visual Strategy:</strong> Instagram is a highly visual platform focused on lifestyle, travel, and food content. Its audience is broader, ranging from young adults to middle-aged users, making it effective for influencing lifestyle interests and tourism decisions. The carousel presents long-spined sea urchins as a sustainable seafood experience, using strong imagery, brief captions, and location tagging. This links environmental awareness with consumption and tourism behaviour.</p>
+  
+  <p><strong>TikTok Narrative Strategy:</strong> TikTok is a short-form, algorithm-driven platform that prioritises storytelling, entertainment, and rapid sharing. The TikTok series follows Wendy, a young weedy seadragon, using episodic storytelling to communicate ecological change. Through dialogue, underwater visuals, and narrative structure, it introduces issues such as kelp forest decline and the impact of long-spined sea urchins.</p>
+</section>
 
-    <header class="case-header">
-      <h1>Great Southern Reef</h1>
-      <p class="tags">Science Communication & Storytelling | Total Word Count: 2,516 words</p>
-    </header>
-
-    <!-- 战略背景部分 -->
-    <section>
-      <h2 class="section-title">Communication Strategy & Overview</h2>
-      <p>As part of the broader communication strategy, the social media component positions tourists as active participants in Great Southern Reef experiences, encouraging engagement through food, diving, and related activities.</p>
-      <p>This communication strategy uses two complementary social media platforms, Instagram and TikTok, to engage different audience groups with the Great Southern Reef (GSR).</p>
-      
-      <p><strong>Instagram Visual Strategy:</strong> Instagram is a highly visual platform focused on lifestyle, travel, and food content. Its audience is broader, ranging from young adults to middle-aged users, making it effective for influencing lifestyle interests and tourism decisions. The carousel presents long-spined sea urchins as a sustainable seafood experience, using strong imagery, brief captions, and location tagging. This links environmental awareness with consumption and tourism behaviour.</p>
-      
-      <p><strong>TikTok Narrative Strategy:</strong> TikTok is a short-form, algorithm-driven platform that prioritises storytelling, entertainment, and rapid sharing. The TikTok series follows Wendy, a young weedy seadragon, using episodic storytelling to communicate ecological change. Through dialogue, underwater visuals, and narrative structure, it introduces issues such as kelp forest decline and the impact of long-spined sea urchins.</p>
-    </section>
-
-    <!-- 模块一：Instagram 轮播图 (现代感交互) -->
-    <section>
-      <h2 class="section-title">Instagram Carousel ("Eat an Urchin")</h2>
-      <p>An Instagram carousel supporting the existing “Eat an Urchin” campaign, presenting long-spined sea urchin as a unique Tasmanian food experience while connecting tourism with conservation.</p>
-      
-      <div class="carousel-container">
-        <div class="carousel-track" id="instaTrack">
-          <div class="carousel-slide">
-            <img src="insta-slide-1.jpg" alt="Slide 1" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 1: Urchin Food Photography ]'">
-          </div>
-          <div class="carousel-slide">
-            <img src="insta-slide-2.jpg" alt="Slide 2" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 2: Taste & Experience Details ]'">
-          </div>
-          <div class="carousel-slide">
-            <img src="insta-slide-3.jpg" alt="Slide 3" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 3: Ecological Impact on Kelp ]'">
-          </div>
-          <div class="carousel-slide">
-            <img src="insta-slide-4.jpg" alt="Slide 4" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 4: Tag @greatsouthernreef ]'">
-          </div>
-        </div>
-        <div class="carousel-nav">
-          <button class="carousel-btn" onclick="scrollCarousel(-1)">← Previous</button>
-          <span class="page-indicator" id="carouselIndicator">1 / 4</span>
-          <button class="carousel-btn" onclick="scrollCarousel(1)">Next →</button>
-        </div>
+<!-- 模块一：Instagram 轮播图 (现代感交互) -->
+<section>
+  <h2 class="section-title">Instagram Carousel ("Eat an Urchin")</h2>
+  <p>An Instagram carousel supporting the existing “Eat an Urchin” campaign, presenting long-spined sea urchin as a unique Tasmanian food experience while connecting tourism with conservation.</p>
+  
+  <div class="carousel-container">
+    <div class="carousel-track" id="instaTrack">
+      <div class="carousel-slide">
+        <img src="insta-slide-1.jpg" alt="Slide 1" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 1: Urchin Food Photography ]'">
       </div>
-    </section>
+      <div class="carousel-slide">
+        <img src="insta-slide-2.jpg" alt="Slide 2" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 2: Taste & Experience Details ]'">
+      </div>
+      <div class="carousel-slide">
+        <img src="insta-slide-3.jpg" alt="Slide 3" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 3: Ecological Impact on Kelp ]'">
+      </div>
+      <div class="carousel-slide">
+        <img src="insta-slide-4.jpg" alt="Slide 4" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 4: Tag @greatsouthernreef ]'">
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" onclick="scrollCarousel(-1)">← Previous</button>
+      <span class="page-indicator" id="carouselIndicator">1 / 4</span>
+      <button class="carousel-btn" onclick="scrollCarousel(1)">Next →</button>
+    </div>
+  </div>
+</section>
 
-    <!-- 模块二：剧本互动电子书 (Book Reader) -->
-    <section>
-      <h2 class="section-title">TikTok Narrative Series: Wendy of the Great Southern Reef</h2>
-      <p>The submitted content is a detailed script for the first episode, including character descriptions, dialogue, narration, and production directions.</p>
+<!-- 模块二：剧本互动电子书 (Book Reader) -->
+<section>
+  <h2 class="section-title">TikTok Narrative Series: Wendy of the Great Southern Reef</h2>
+  <p>The submitted content is a detailed script for the first episode, including character descriptions, dialogue, narration, and production directions.</p>
 
-      <div class="book-container">
-        <!-- 页面 1：角色列表与背景 -->
-        <div class="book-page active" id="page-1">
-          <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Character List & Introduction</h3>
-          <p><strong>Wendy:</strong> A young weedy seadragon. She lives in a coastal kelp forest, highly observant and innately curious. She serves as the emotional heart of the series.</p>
-          <p><strong>Emma:</strong> A yellowtail scad and Wendy’s closest friend. She is the first to alert Wendy to subtle shifts in their marine environment.</p>
-          <p><strong>William:</strong> An adult weedy seadragon and Wendy’s older brother. He carries and broods fertilised eggs beneath his tail, cautious and protective.</p>
-          <p><strong>Ben:</strong> A small goby, bottom-dwelling and reef-bound. Direct, perceptive and plain-spoken, delivering critical hidden information.</p>
-          <p><strong>Officer Andrew & Sea Urchins:</strong> The unseen guardians and the growing ecological threat driving the central conflict.</p>
-        </div>
+  <div class="book-container">
+    <!-- 页面 1：角色列表与背景 -->
+    <div class="book-page active" id="page-1">
+      <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Character List & Introduction</h3>
+      <div class="script-content">CHARACTER LIST
+Wendy
+A young weedy seadragon. She lives in a coastal kelp forest, highly observant and innately curious. She serves as the emotional heart of the series, sensitive to small changes around her.
+Emma
+A yellowtail scad and Wendy’s closest friend. As a schooling fish, she travels and migrates with her group. In this episode, she is the first to alert Wendy to subtle shifts in their marine environment.
+William
+An adult weedy seadragon and Wendy’s older brother. He carries and broods fertilised eggs beneath his tail, following the real-life male egg-brooding behaviour of weedy seadragons. Cautious, protective, and grounded, he is reluctant to accept that their stable kelp home could be at risk.
+Ben
+A small goby, bottom-dwelling and reef-bound. Direct, perceptive and plain-spoken, he keeps to the seabed and notices small changes larger creatures overlook. He overhears Wendy and William’s conversation and delivers critical hidden information.
+Officer Andrew
+A wrasse, one of the kelp reef’s natural “guardians”. He never appears on screen, but his unexplained absence drives the episode’s central conflict. Wrasse naturally limit sea urchin numbers by preying on juveniles, keeping the ecosystem balanced.
+Long-spined sea urchins
+An unseen, growing ecological threat. With fewer wrasse predators, their population surges; they overgraze kelp beds, stripping vegetation and turning once-living reef into a barren wasteland.</div>
+    </div>
 
-        <!-- 页面 2：剧本正文 Part 1 -->
-        <div class="book-page" id="page-2">
-          <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Episode 1: The Home That Is Disappearing (Part I)</h3>
-          <div class="script-content">FADE IN:
-
+    <!-- 页面 2：剧本正文 Part 1 -->
+    <div class="book-page" id="page-2">
+      <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Episode 1: The Home That Is Disappearing (Part I)</h3>
+      <div class="script-content">EPISODE 1: THE HOME THAT IS DISAPPEARING
+FADE IN:
 BLACK SCREEN
-SOUND DESIGN: Low underwater ambient hum. Gentle bubble pops. Slow water current sweeping over rock and kelp fronds.
+SOUND DESIGN:
+Low underwater ambient hum. Gentle bubble pops. Slow water current sweeping over rock and kelp fronds.
 A girl’s voice echoes, distant and muffled.
-
 EMMA (V.O., muffled)
 Wendy… Wendy… Wendy…
-
+The voice grows gradually clearer, as if drawing near through the water.
 EMMA (V.O., clear)
 Wendy!
-
 WENDY POV SHOT
-The screen brightens slowly. Pale aquamarine light filters through silver-blue water. We see entirely through Wendy’s eyes. Kelp fronds drift across the lens.
-
+The screen brightens slowly. Pale aquamarine light filters through silver-blue water.
+We see entirely through Wendy’s eyes. The frame shakes faintly — soft, disoriented movement. Left, right, left again. Wendy has just woken, struggling to focus her vision.
+Kelp fronds drift across the lens. The reef appears calm, lush and alive. Tall seaweed sways in the lazy current. Small silvery fish dart through sunbeams. Coral and weathered rock formations lie quiet beneath the thick kelp canopy.
+Wendy blinks slowly.
+A familiar shape drifts into view, hovering directly in front of her. It’s Emma.
+Emma hangs close, her posture tight with quiet anxiety.
 WENDY
 What?
-Emma hangs close, her posture tight with quiet anxiety.
-
+The camera steadies.
 WENDY
 Emma? Why are you here?
-
 CUT TO THIRD-PERSON VIEW
 Wendy comes into full view: a young weedy seadragon, half-camouflaged within swaying kelp.
-
+MUSIC:
+A low, understated uneasy ambient tone hums in. Subtle but unsettling — the reef’s quiet peace is broken.
+Emma flicks her tail slightly, gesturing toward the shadowed outer edge of the kelp forest.
 EMMA
 Come with me.
-Wendy hesitates, then glides after her. In the mid-background, a vast school of yellowtail scad surges as one. The camera rises higher, revealing the reef below — mostly vibrant, but with a stretch in the far distance stripped bare into a barren wasteland.
-
+Wendy hesitates, then glides after her.
+CAMERA MOVEMENT: Slow tracking shot
+The two swim deeper through winding kelp.
+The camera holds level at first, then drifts gradually upward.
+In the mid-background, a vast school of yellowtail scad surges as one. Their silver bodies flash in synchronized motion, winding like a living ribbon through the water.
+The camera rises higher, pulling back to reveal the reef spread out below. Most of it remains vibrant and dense — but one stretch in the far distance lies bare: kelp stripped away, leaving pale empty rock and sand.
+Wendy scans her surroundings, confused.
 WENDY
 Why’s everyone leaving the reef?
-
+Emma’s tone is calm, but heavy with seriousness.
 EMMA
-Because our home’s fading. The kelp isn’t half as thick as it used to be. Sea urchins are spreading further every day, and food’s getting scarcer. We have to move to survive.</div>
-        </div>
+Because our home’s fading. The kelp isn’t half as thick as it used to be. Sea urchins are spreading further every day, and food’s getting scarcer. We have to move to survive.
+Wendy stares out at the barren stretch of reef, processing the weight of her words.
+WENDY
+Where will your school go?
+EMMA
+No one knows yet. Somewhere with more kelp, more food. You know us — we never stay rooted in one place for long.
+A distant call rings out from off-screen.
+FISH VOICE (O.S.)
+Emma! Hurry up!
+Emma twists to glance back at her departing school, then turns again to Wendy.
+EMMA
+I have to go.
+Wendy’s voice softens, quiet and vulnerable.
+WENDY
+Will I ever see you again?
+EMMA
+Of course I will. When the waters settle, I’ll come find you.
+She drifts a little closer.
+EMMA
+Look after yourself. You should think about leaving too, while you still can.
+Wendy opens her mouth to reply, but Emma flicks her tail gently, cutting her off.
+EMMA
+Stay safe, Wendy.
+Emma glides away, merging instantly into the silver school and vanishing into the distance.
+CAMERA MOVEMENT: Hold static wide shot
+The camera lingers on Wendy, alone, watching Emma’s school fade into the blue.
+MUSIC:
+Still soft, the unease lingers with no warm resolution.
+Wendy murmurs to herself.
+WENDY
+This isn’t good at all.
+She turns toward the deeper, denser part of the kelp forest, pausing in quiet thought.
+WENDY
+I need to talk to William.</div>
+    </div>
 
-        <!-- 页面 3：剧本正文 Part 2 -->
-        <div class="book-page" id="page-3">
-          <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Episode 1: The Home That Is Disappearing (Part II)</h3>
-          <div class="script-content">INT. DENSE KELP PATCH - UNDERWATER
-William rests anchored among the fronds, calm and steady, holding his cluster of eggs safely tucked beneath his tail. Wendy glides into view.
-
+    <!-- 页面 3：剧本正文 Part 2 -->
+    <div class="book-page" id="page-3">
+      <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Episode 1: The Home That Is Disappearing (Part II)</h3>
+      <div class="script-content">CUT TO:
+TRANSITION SHOT
+Bubbles drift upward through the frame. Long kelp fronds sweep across the screen like a natural dissolve wipe.
+INT. DENSE KELP PATCH - UNDERWATER
+Thick overhead kelp canopy dims the light, casting soft muted green hues. The space feels sheltered, secluded and still.
+William rests anchored among the fronds, calm and steady. He holds his cluster of eggs safely tucked beneath his tail, motionless to protect them.
+Wendy glides into view. William lifts his gaze.
 WILLIAM
 Wendy. You’re awake far earlier than usual.
-
+Wendy moves closer, eyes drifting down to the eggs.
+WENDY
+How are the eggs holding up? Are they safe?
+William glances gently at the brood under his tail.
+WILLIAM
+They’re strong and healthy. In roughly two weeks, they’ll begin to hatch.
+He meets her eyes again.
+WILLIAM
+What’s brought you all the way out here?
+Wendy speaks quickly, rushing to share the news.
 WENDY
 Emma just came to say goodbye. She told me sea urchins are spreading fast, and this whole kelp forest might be in real danger.
-
+William nods slowly, unbothered, almost dismissive.
 WILLIAM
-Oh, that’s just how schooling fish are. We’re not going anywhere. The reef is still here. The kelp is still thick.
-
+Oh, that’s just how schooling fish are. They drift in one day, panic the next, then drift off again.
+WENDY
+She said I should consider leaving too.
+William flicks his gaze toward the reef’s outer edge, then back to his sister.
+WILLIAM
+We’re not going anywhere.
+Wendy blinks, surprised by his certainty.
+WENDY
+Are you really sure?
+William shifts his body slightly, curling his tail tighter to shield the eggs.
+WILLIAM
+I’m sure of this much: the reef is still here. The kelp is still thick. Everything looks perfectly normal.
+WILLIAM
+And the reef guardians are still keeping balance, aren’t they? There’s no need for worry, Wendy.
+WENDY
+You mean Officer Andrew and the wrasse?
+WILLIAM
+Exactly. If something were truly wrong, they’d have stepped in long ago.
+Before Wendy can reply, a quiet voice rises from the seabed below.
 BEN (O.S.)
 That’s exactly the problem.
-Ben the goby emerges from the sand and rock.
-
+CAMERA MOVEMENT: Tilt slowly down to the seabed
+Ben the goby has been there all along, half-hidden in sand and scattered rock, quietly listening. He stays low, natural to his bottom-dwelling nature, only now choosing to speak up.
 BEN
-I’m Ben. Just a goby that sticks close to the sand. Do you know how many wrasse have gone missing lately? Even Officer Andrew is gone. Without the wrasse hunting juveniles, sea urchins will only spread further.
-
+Sorry to intrude. But if you’re talking about the wrasse keeping urchins in check — you both need to hear the truth.
+William regards him warily.
+WILLIAM
+And who are you?
+BEN
+I’m Ben. Just a goby that sticks close to the sand. I see all the small changes everyone else swims right past.
+Wendy leans down, curious.
+WENDY
+What do you mean by that?
+Ben flicks his small fins, looking between brother and sister.
+BEN
+You’re right — wrasse keep the reef balanced. They hunt young sea urchins and stop their numbers from exploding out of control.
+Wendy nods.
+WENDY
+The patrol fish that keep everything in order.
+BEN
+They do. But do you know how many wrasse have gone missing lately?
+William tenses slightly for the first time.
+WILLIAM
+Missing? What are you talking about?
+Ben shifts in the sand, earnest and plain-spoken.
+BEN
+Fish vanish now and then — hooks and nets. It’s always happened. But it’s getting worse. Even Officer Andrew is gone.
+William stiffens visibly.
+WILLIAM
+Gone?
+BEN
+From what I’ve seen, yes. The water around us looks calm, but without the wrasse hunting the juveniles, sea urchins will only spread further. Fast.
+Wendy and William exchange a heavy, uneasy look.
+BEN
+As long as wrasse and other predators are around, urchins stay contained. Take them away, and the urchins creep into every corner, eating the kelp right down to bare rock.
+William struggles to stay composed.
+WILLIAM
+That doesn’t mean the whole forest is at risk. This reef has always been stable.
+BEN
+Maybe not today. But you can’t pretend tomorrow will look just like today.
+The line hangs heavy in the still water.
+Wendy slowly turns her gaze toward the reef edge. The kelp still looks beautiful, lush and familiar — yet now it feels fragile, unsteady. The water around them feels wider, less safe.
 WENDY
 Emma wasn’t exaggerating at all.
-
 BEN
 She wasn’t. She just chose to leave before it gets worse.
-
+William looks to Wendy, then to Ben, then out over the quiet reef.
+WILLIAM
+This place has always had thick kelp. It’s never shifted like this before.
+Ben nods softly.
+BEN
+That’s the trouble with stable homes. No one notices the change until it’s already started.
+Wendy’s eyes drift to the cluster of eggs tucked under William’s tail, quiet concern settling over her.
+Ben readies himself to slip back into the seabed shadows.
+BEN
+I’d better head off. Stay safe, both of you.
+WENDY
+Goodbye, Ben.
+WILLIAM
+Thank you for telling us the truth.
+Ben slips silently into the sand and rock, disappearing from sight.
+CAMERA MOVEMENT: Slow pan upward
+A large, faint shadow drifts across the water’s surface far above the reef — too distant to make out clearly, but broad, man-made and faintly unnatural.
+Wendy and William both lift their heads, staring upward in quiet unease.
+MUSIC:
+The soft gentle theme continues, layered with a low, deep ominous undertone that lingers underneath.
+The camera holds on their fixed, upward gaze.
 FADE TO BLACK.
-ON SCREEN TEXT: TO BE CONTINUED</div>
-        </div>
+ON SCREEN TEXT:
+TO BE CONTINUED</div>
+    </div>
 
-        <!-- 页面 4：团队贡献明细 -->
-        <div class="book-page" id="page-4">
-          <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Team Contributions & Breakdown</h3>
-          <table class="contrib-table">
-            <thead>
-              <tr>
-                <th>Student</th>
-                <th>Strategy Contribution</th>
-                <th>Word Count</th>
-                <th>Other Contribution</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Colby</strong></td>
-                <td>Communication Strategy writing & research (~80%)</td>
-                <td>2,000</td>
-                <td>Background info, research, editing (~20%)</td>
-              </tr>
-              <tr>
-                <td><strong>Leila</strong></td>
-                <td>Sections 1, 5, 6 written strategy (~60%)</td>
-                <td>1,390</td>
-                <td>Social media posts: 1x Insta, 2x TikTok (~40%)</td>
-              </tr>
-              <tr>
-                <td><strong>Chris</strong></td>
-                <td>Part 6 (~20%)</td>
-                <td>~200</td>
-                <td>Documentary script (~80%)</td>
-              </tr>
-              <tr>
-                <td><strong>Phoebe</strong></td>
-                <td>Part 6 (~20%)</td>
-                <td>~200</td>
-                <td>Feature Articles (2) (~80%)</td>
-              </tr>
-              <tr>
-                <td><strong>Erin</strong></td>
-                <td>Part 6 social media specific (~20%)</td>
-                <td>~200</td>
-                <td>Social media posts: Insta & TikTok (~80%)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- 书本翻页控制按钮 -->
-        <div class="book-controls">
-          <button class="carousel-btn" onclick="changePage(-1)">← Previous Page</button>
-          <span class="page-indicator" id="bookIndicator">Page 1 of 4</span>
-          <button class="carousel-btn" onclick="changePage(1)">Next Page →</button>
-        </div>
-      </div>
-    </section>
-
+    <!-- 书本翻页控制按钮 -->
+    <div class="book-controls">
+      <button class="carousel-btn" onclick="changePage(-1)">← Previous Page</button>
+      <span class="page-indicator" id="bookIndicator">Page 1 of 3</span>
+      <button class="carousel-btn" onclick="changePage(1)">Next Page →</button>
+    </div>
   </div>
+</section>
+</div>
+<script>
+// 轮播图控制逻辑
+const track = document.getElementById('instaTrack');
+const indicator = document.getElementById('carouselIndicator');
+let currentSlide = 0;
+const totalSlides = 4;
+function scrollCarousel(direction) {
+  currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+  const slideWidth = track.clientWidth;
+  track.scrollTo({ left: slideWidth * currentSlide, behavior: 'smooth' });
+  indicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
+}
 
-  <script>
-    // 轮播图控制逻辑
-    const track = document.getElementById('instaTrack');
-    const indicator = document.getElementById('carouselIndicator');
-    let currentSlide = 0;
-    const totalSlides = 4;
+// 电子书翻页控制逻辑
+let currentPage = 1;
+const totalPages = 3;
 
-    function scrollCarousel(direction) {
-      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-      const slideWidth = track.clientWidth;
-      track.scrollTo({ left: slideWidth * currentSlide, behavior: 'smooth' });
-      indicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
-    }
-
-    // 电子书翻页控制逻辑
-    let currentPage = 1;
-    const totalPages = 4;
-
-    function changePage(direction) {
-      document.getElementById(`page-${currentPage}`).classList.remove('active');
-      currentPage = currentPage + direction;
-      if (currentPage > totalPages) currentPage = 1;
-      if (currentPage < 1) currentPage = totalPages;
-      document.getElementById(`page-${currentPage}`).classList.add('active');
-      document.getElementById('bookIndicator').innerText = `Page ${currentPage} of ${totalPages}`;
-    }
-  </script>
-
+function changePage(direction) {
+  document.getElementById(`page-${currentPage}`).classList.remove('active');
+  currentPage = currentPage + direction;
+  if (currentPage > totalPages) currentPage = 1;
+  if (currentPage < 1) currentPage = totalPages;
+  document.getElementById(`page-${currentPage}`).classList.add('active');
+  document.getElementById('bookIndicator').innerText = `Page ${currentPage} of ${totalPages}`;
+}
+</script>
 </body>
 </html>
