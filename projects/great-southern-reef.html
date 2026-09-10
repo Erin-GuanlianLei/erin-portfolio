@@ -1,279 +1,557 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Great Southern Reef — Case Study</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
---bg-warm-white: #FAF7F2;
---text-dark: #1A1A1A;
---border-color: #E2DDD5;
---accent-gray: #757471;
---accent-subtle: #F4EFF6;
-}
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body {
-  background-color: var(--bg-warm-white);
-  color: var(--text-dark);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  padding: 4rem 2rem;
-}
+  <title>Great Southern Reef — Case Study</title>
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-.back-link {
-  display: inline-block;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  text-decoration: none;
-  color: var(--accent-gray);
-  margin-bottom: 2rem;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
-}
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
-.back-link:hover {
-  border-color: var(--text-dark);
-  color: var(--text-dark);
-}
+  <style>
 
-header.case-header {
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 2rem;
-}
+    :root {
+      --bg-warm-white: #FAF7F2;
+      --text-dark: #1A1A1A;
+      --border-color: #E2DDD5;
+      --accent-gray: #757471;
+      --accent-subtle: #F4EFF6;
+    }
 
-header.case-header h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-}
 
-header.case-header .tags {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent-gray);
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-section {
-  margin-bottom: 4rem;
-}
 
-h2.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-}
+    body {
+      background-color: var(--bg-warm-white);
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding: 4rem 2rem;
 
-p {
-  margin-bottom: 1.2rem;
-  font-size: 0.95rem;
-  color: #333;
-}
+      /* 页面切换新增 */
+      overflow-x: hidden;
+      animation:
+        projectPageEnter
+        0.9s
+        cubic-bezier(0.76, 0, 0.24, 1)
+        both;
+    }
 
-/* 现代感 Instagram 轮播图样式 */
-.carousel-container {
-  position: relative;
-  overflow: hidden;
-  background: #E8E3DA;
-  border-radius: 4px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-}
 
-.carousel-track {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding-bottom: 1rem;
-}
+    /* =========================
+       PAGE TRANSITION
+       ========================= */
 
-.carousel-track::-webkit-scrollbar {
-  display: none;
-}
+    @keyframes projectPageEnter {
 
-.carousel-slide {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
-  background: #FFFFFF;
-  height: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border-color);
-  font-size: 0.9rem;
-  color: var(--accent-gray);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  position: relative;
-  overflow: hidden;
-}
+      from {
+        opacity: 0;
+        transform: translateX(10vw);
+      }
 
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
 
-.carousel-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
-}
+    }
 
-.carousel-btn {
-  background: none;
-  border: 1px solid var(--text-dark);
-  padding: 0.4rem 1rem;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-}
 
-.carousel-btn:hover {
-  background: var(--text-dark);
-  color: var(--bg-warm-white);
-}
+    body.page-leave-back {
+      animation:
+        projectPageLeaveBack
+        0.8s
+        cubic-bezier(0.76, 0, 0.24, 1)
+        forwards;
+    }
 
-/* 翻页书本组件样式 (Book Reader for Script) */
-.book-container {
-  background: #FFF;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 3rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-}
 
-.book-page {
-  display: none;
-  min-height: 450px;
-  animation: fadeIn 0.5s ease;
-}
+    @keyframes projectPageLeaveBack {
 
-.book-page.active {
-  display: block;
-}
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+      to {
+        opacity: 0;
+        transform: translateX(12vw);
+      }
 
-.script-content {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.85rem;
-  line-height: 1.7;
-  white-space: pre-wrap;
-  background: #FAFAFA;
-  padding: 2rem;
-  border-left: 3px solid var(--text-dark);
-  max-height: 450px;
-  overflow-y: auto;
-  margin-top: 1rem;
-}
+    }
 
-.book-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  border-top: 1px solid var(--border-color);
-  padding-top: 1rem;
-}
 
-.page-indicator {
-  font-size: 0.85rem;
-  color: var(--accent-gray);
-  letter-spacing: 0.1em;
-}
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-@media (max-width: 768px) {
-  header.case-header h1 { font-size: 2.5rem; }
-  .book-container { padding: 1.5rem; }
-}
-</style>
+
+    .back-link {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--accent-gray);
+      margin-bottom: 2rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+
+    .back-link:hover {
+      border-color: var(--text-dark);
+      color: var(--text-dark);
+    }
+
+
+    header.case-header {
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 2rem;
+    }
+
+
+    header.case-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+
+    header.case-header .tags {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gray);
+    }
+
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+
+    h2.section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+
+    p {
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+
+    /* 现代感 Instagram 轮播图样式 */
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      background: #E8E3DA;
+      border-radius: 4px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+
+    .carousel-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding-bottom: 1rem;
+    }
+
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      background: #FFFFFF;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      color: var(--accent-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+
+    .carousel-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+
+    .carousel-btn {
+      background: none;
+      border: 1px solid var(--text-dark);
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+
+    .carousel-btn:hover {
+      background: var(--text-dark);
+      color: var(--bg-warm-white);
+    }
+
+
+    /* 翻页书本组件样式 (Book Reader for Script) */
+
+    .book-container {
+      background: #FFF;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+
+    .book-page {
+      display: none;
+      min-height: 450px;
+      animation: fadeIn 0.5s ease;
+    }
+
+
+    .book-page.active {
+      display: block;
+    }
+
+
+    @keyframes fadeIn {
+
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    .script-content {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      background: #FAFAFA;
+      padding: 2rem;
+      border-left: 3px solid var(--text-dark);
+      max-height: 450px;
+      overflow-y: auto;
+      margin-top: 1rem;
+    }
+
+
+    .book-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+
+
+    .page-indicator {
+      font-size: 0.85rem;
+      color: var(--accent-gray);
+      letter-spacing: 0.1em;
+    }
+
+
+    @media (max-width: 768px) {
+
+      header.case-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .book-container {
+        padding: 1.5rem;
+      }
+
+    }
+
+  </style>
 </head>
+
+
 <body>
-<div class="container">
-<a href="../index.html" class="back-link">← Back to Exhibition</a>
-<header class="case-header">
-  <h1>Great Southern Reef</h1>
-  <p class="tags">Science Communication & Storytelling | Total Word Count: 2,516 words</p>
-</header>
 
-<!-- 战略背景部分 -->
-<section>
-  <h2 class="section-title">Communication Strategy & Overview</h2>
-  <p>As part of the broader communication strategy, the social media component positions tourists as active participants in Great Southern Reef experiences, encouraging engagement through food, diving, and related activities.</p>
-  <p>This communication strategy uses two complementary social media platforms, Instagram and TikTok, to engage different audience groups with the Great Southern Reef (GSR).</p>
-  
-  <p><strong>Instagram Visual Strategy:</strong> Instagram is a highly visual platform focused on lifestyle, travel, and food content. Its audience is broader, ranging from young adults to middle-aged users, making it effective for influencing lifestyle interests and tourism decisions. The carousel presents long-spined sea urchins as a sustainable seafood experience, using strong imagery, brief captions, and location tagging. This links environmental awareness with consumption and tourism behaviour.</p>
-  
-  <p><strong>TikTok Narrative Strategy:</strong> TikTok is a short-form, algorithm-driven platform that prioritises storytelling, entertainment, and rapid sharing. The TikTok series follows Wendy, a young weedy seadragon, using episodic storytelling to communicate ecological change. Through dialogue, underwater visuals, and narrative structure, it introduces issues such as kelp forest decline and the impact of long-spined sea urchins.</p>
-</section>
 
-<!-- 模块一：Instagram 轮播图 (现代感交互) -->
-<section>
-  <h2 class="section-title">Instagram Carousel ("Eat an Urchin")</h2>
-  <p>An Instagram carousel supporting the existing “Eat an Urchin” campaign, presenting long-spined sea urchin as a unique Tasmanian food experience while connecting tourism with conservation.</p>
-  
-  <div class="carousel-container">
-    <div class="carousel-track" id="instaTrack">
-      <div class="carousel-slide">
-        <img src="insta-slide-1.jpg" alt="Slide 1" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 1: Urchin Food Photography ]'">
-      </div>
-      <div class="carousel-slide">
-        <img src="insta-slide-2.jpg" alt="Slide 2" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 2: Taste & Experience Details ]'">
-      </div>
-      <div class="carousel-slide">
-        <img src="insta-slide-3.jpg" alt="Slide 3" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 3: Ecological Impact on Kelp ]'">
-      </div>
-      <div class="carousel-slide">
-        <img src="insta-slide-4.jpg" alt="Slide 4" onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 4: Tag @greatsouthernreef ]'">
-      </div>
-    </div>
-    <div class="carousel-nav">
-      <button class="carousel-btn" onclick="scrollCarousel(-1)">← Previous</button>
-      <span class="page-indicator" id="carouselIndicator">1 / 4</span>
-      <button class="carousel-btn" onclick="scrollCarousel(1)">Next →</button>
-    </div>
-  </div>
-</section>
+  <div class="container">
 
-<!-- 模块二：剧本互动电子书 (Book Reader) -->
-<section>
-  <h2 class="section-title">TikTok Narrative Series: Wendy of the Great Southern Reef</h2>
-  <p>The submitted content is a detailed script for the first episode, including character descriptions, dialogue, narration, and production directions.</p>
 
-  <div class="book-container">
-    <!-- 页面 1：角色列表与背景 -->
-    <div class="book-page active" id="page-1">
-      <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Character List & Introduction</h3>
-      <div class="script-content">CHARACTER LIST
+    <a
+      href="../index.html"
+      class="back-link back-transition"
+    >
+      ← Back to Exhibition
+    </a>
+
+
+    <header class="case-header">
+
+      <h1>Great Southern Reef</h1>
+
+      <p class="tags">
+        Science Communication & Storytelling | Total Word Count: 2,516 words
+      </p>
+
+    </header>
+
+
+
+    <!-- 战略背景部分 -->
+
+    <section>
+
+      <h2 class="section-title">
+        Communication Strategy & Overview
+      </h2>
+
+
+      <p>
+        As part of the broader communication strategy, the social media
+        component positions tourists as active participants in Great Southern
+        Reef experiences, encouraging engagement through food, diving, and
+        related activities.
+      </p>
+
+
+      <p>
+        This communication strategy uses two complementary social media
+        platforms, Instagram and TikTok, to engage different audience groups
+        with the Great Southern Reef (GSR).
+      </p>
+
+
+      <p>
+        <strong>Instagram Visual Strategy:</strong>
+        Instagram is a highly visual platform focused on lifestyle, travel,
+        and food content. Its audience is broader, ranging from young adults
+        to middle-aged users, making it effective for influencing lifestyle
+        interests and tourism decisions. The carousel presents long-spined
+        sea urchins as a sustainable seafood experience, using strong imagery,
+        brief captions, and location tagging. This links environmental
+        awareness with consumption and tourism behaviour.
+      </p>
+
+
+      <p>
+        <strong>TikTok Narrative Strategy:</strong>
+        TikTok is a short-form, algorithm-driven platform that prioritises
+        storytelling, entertainment, and rapid sharing. The TikTok series
+        follows Wendy, a young weedy seadragon, using episodic storytelling
+        to communicate ecological change. Through dialogue, underwater visuals,
+        and narrative structure, it introduces issues such as kelp forest
+        decline and the impact of long-spined sea urchins.
+      </p>
+
+    </section>
+
+
+
+    <!-- 模块一：Instagram 轮播图 -->
+
+    <section>
+
+      <h2 class="section-title">
+        Instagram Carousel ("Eat an Urchin")
+      </h2>
+
+
+      <p>
+        An Instagram carousel supporting the existing “Eat an Urchin”
+        campaign, presenting long-spined sea urchin as a unique Tasmanian
+        food experience while connecting tourism with conservation.
+      </p>
+
+
+      <div class="carousel-container">
+
+
+        <div
+          class="carousel-track"
+          id="instaTrack"
+        >
+
+
+          <div class="carousel-slide">
+
+            <img
+              src="insta-slide-1.jpg"
+              alt="Slide 1"
+              onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 1: Urchin Food Photography ]'"
+            >
+
+          </div>
+
+
+          <div class="carousel-slide">
+
+            <img
+              src="insta-slide-2.jpg"
+              alt="Slide 2"
+              onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 2: Taste & Experience Details ]'"
+            >
+
+          </div>
+
+
+          <div class="carousel-slide">
+
+            <img
+              src="insta-slide-3.jpg"
+              alt="Slide 3"
+              onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 3: Ecological Impact on Kelp ]'"
+            >
+
+          </div>
+
+
+          <div class="carousel-slide">
+
+            <img
+              src="insta-slide-4.jpg"
+              alt="Slide 4"
+              onerror="this.style.display='none'; this.parentElement.innerText='[ Slide 4: Tag @greatsouthernreef ]'"
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <div class="carousel-nav">
+
+
+          <button
+            class="carousel-btn"
+            onclick="scrollCarousel(-1)"
+          >
+            ← Previous
+          </button>
+
+
+          <span
+            class="page-indicator"
+            id="carouselIndicator"
+          >
+            1 / 4
+          </span>
+
+
+          <button
+            class="carousel-btn"
+            onclick="scrollCarousel(1)"
+          >
+            Next →
+          </button>
+
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- 模块二：剧本互动电子书 -->
+
+    <section>
+
+
+      <h2 class="section-title">
+        TikTok Narrative Series: Wendy of the Great Southern Reef
+      </h2>
+
+
+      <p>
+        The submitted content is a detailed script for the first episode,
+        including character descriptions, dialogue, narration, and production
+        directions.
+      </p>
+
+
+
+      <div class="book-container">
+
+
+
+        <!-- 页面 1：角色列表与背景 -->
+
+        <div
+          class="book-page active"
+          id="page-1"
+        >
+
+
+          <h3
+            style="
+              font-family:'Cormorant Garamond', serif;
+              font-size: 1.5rem;
+              margin-bottom:1rem;
+            "
+          >
+            Character List & Introduction
+          </h3>
+
+
+          <div class="script-content">CHARACTER LIST
 Wendy
 A young weedy seadragon. She lives in a coastal kelp forest, highly observant and innately curious. She serves as the emotional heart of the series, sensitive to small changes around her.
 Emma
@@ -286,12 +564,32 @@ Officer Andrew
 A wrasse, one of the kelp reef’s natural “guardians”. He never appears on screen, but his unexplained absence drives the episode’s central conflict. Wrasse naturally limit sea urchin numbers by preying on juveniles, keeping the ecosystem balanced.
 Long-spined sea urchins
 An unseen, growing ecological threat. With fewer wrasse predators, their population surges; they overgraze kelp beds, stripping vegetation and turning once-living reef into a barren wasteland.</div>
-    </div>
 
-    <!-- 页面 2：剧本正文 Part 1 -->
-    <div class="book-page" id="page-2">
-      <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Episode 1: The Home That Is Disappearing (Part I)</h3>
-      <div class="script-content">EPISODE 1: THE HOME THAT IS DISAPPEARING
+
+        </div>
+
+
+
+        <!-- 页面 2：剧本正文 Part 1 -->
+
+        <div
+          class="book-page"
+          id="page-2"
+        >
+
+
+          <h3
+            style="
+              font-family:'Cormorant Garamond', serif;
+              font-size: 1.5rem;
+              margin-bottom:1rem;
+            "
+          >
+            Episode 1: The Home That Is Disappearing (Part I)
+          </h3>
+
+
+          <div class="script-content">EPISODE 1: THE HOME THAT IS DISAPPEARING
 FADE IN:
 BLACK SCREEN
 SOUND DESIGN:
@@ -366,12 +664,32 @@ This isn’t good at all.
 She turns toward the deeper, denser part of the kelp forest, pausing in quiet thought.
 WENDY
 I need to talk to William.</div>
-    </div>
 
-    <!-- 页面 3：剧本正文 Part 2 -->
-    <div class="book-page" id="page-3">
-      <h3 style="font-family:'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom:1rem;">Episode 1: The Home That Is Disappearing (Part II)</h3>
-      <div class="script-content">CUT TO:
+
+        </div>
+
+
+
+        <!-- 页面 3：剧本正文 Part 2 -->
+
+        <div
+          class="book-page"
+          id="page-3"
+        >
+
+
+          <h3
+            style="
+              font-family:'Cormorant Garamond', serif;
+              font-size: 1.5rem;
+              margin-bottom:1rem;
+            "
+          >
+            Episode 1: The Home That Is Disappearing (Part II)
+          </h3>
+
+
+          <div class="script-content">CUT TO:
 TRANSITION SHOT
 Bubbles drift upward through the frame. Long kelp fronds sweep across the screen like a natural dissolve wipe.
 INT. DENSE KELP PATCH - UNDERWATER
@@ -484,42 +802,212 @@ The camera holds on their fixed, upward gaze.
 FADE TO BLACK.
 ON SCREEN TEXT:
 TO BE CONTINUED</div>
-    </div>
 
-    <!-- 书本翻页控制按钮 -->
-    <div class="book-controls">
-      <button class="carousel-btn" onclick="changePage(-1)">← Previous Page</button>
-      <span class="page-indicator" id="bookIndicator">Page 1 of 3</span>
-      <button class="carousel-btn" onclick="changePage(1)">Next Page →</button>
-    </div>
+
+        </div>
+
+
+
+        <!-- 书本翻页控制按钮 -->
+
+        <div class="book-controls">
+
+
+          <button
+            class="carousel-btn"
+            onclick="changePage(-1)"
+          >
+            ← Previous Page
+          </button>
+
+
+          <span
+            class="page-indicator"
+            id="bookIndicator"
+          >
+            Page 1 of 3
+          </span>
+
+
+          <button
+            class="carousel-btn"
+            onclick="changePage(1)"
+          >
+            Next Page →
+          </button>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
   </div>
-</section>
-</div>
-<script>
-// 轮播图控制逻辑
-const track = document.getElementById('instaTrack');
-const indicator = document.getElementById('carouselIndicator');
-let currentSlide = 0;
-const totalSlides = 4;
-function scrollCarousel(direction) {
-  currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-  const slideWidth = track.clientWidth;
-  track.scrollTo({ left: slideWidth * currentSlide, behavior: 'smooth' });
-  indicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
-}
 
-// 电子书翻页控制逻辑
-let currentPage = 1;
-const totalPages = 3;
 
-function changePage(direction) {
-  document.getElementById(`page-${currentPage}`).classList.remove('active');
-  currentPage = currentPage + direction;
-  if (currentPage > totalPages) currentPage = 1;
-  if (currentPage < 1) currentPage = totalPages;
-  document.getElementById(`page-${currentPage}`).classList.add('active');
-  document.getElementById('bookIndicator').innerText = `Page ${currentPage} of ${totalPages}`;
-}
-</script>
+
+  <script>
+
+
+    /* =========================
+       轮播图控制逻辑
+       ========================= */
+
+
+    const track =
+      document.getElementById('instaTrack');
+
+    const indicator =
+      document.getElementById('carouselIndicator');
+
+    let currentSlide = 0;
+
+    const totalSlides = 4;
+
+
+    function scrollCarousel(direction) {
+
+      currentSlide =
+        (currentSlide + direction + totalSlides)
+        % totalSlides;
+
+      const slideWidth =
+        track.clientWidth;
+
+      track.scrollTo({
+        left: slideWidth * currentSlide,
+        behavior: 'smooth'
+      });
+
+      indicator.innerText =
+        `${currentSlide + 1} / ${totalSlides}`;
+
+    }
+
+
+
+    /* =========================
+       电子书翻页控制逻辑
+       ========================= */
+
+
+    let currentPage = 1;
+
+    const totalPages = 3;
+
+
+    function changePage(direction) {
+
+      document
+        .getElementById(`page-${currentPage}`)
+        .classList
+        .remove('active');
+
+
+      currentPage =
+        currentPage + direction;
+
+
+      if (currentPage > totalPages) {
+        currentPage = 1;
+      }
+
+
+      if (currentPage < 1) {
+        currentPage = totalPages;
+      }
+
+
+      document
+        .getElementById(`page-${currentPage}`)
+        .classList
+        .add('active');
+
+
+      document
+        .getElementById('bookIndicator')
+        .innerText =
+        `Page ${currentPage} of ${totalPages}`;
+
+    }
+
+
+
+    /* =========================
+       BACK TO EXHIBITION TRANSITION
+       ========================= */
+
+
+    const backTransition =
+      document.querySelector('.back-transition');
+
+
+    if (backTransition) {
+
+      backTransition.addEventListener(
+        'click',
+        function (event) {
+
+
+          event.preventDefault();
+
+
+          const destination =
+            this.href;
+
+
+          /*
+            当前 Great Southern Reef
+            页面向右离场
+          */
+
+          document.body.classList.add(
+            'page-leave-back'
+          );
+
+
+          /*
+            动画完成后返回首页
+          */
+
+          setTimeout(() => {
+
+            window.location.href =
+              destination;
+
+          }, 760);
+
+
+        }
+      );
+
+    }
+
+
+
+    /*
+      如果通过浏览器 Back 回到这一页，
+      清除之前的离场状态。
+    */
+
+    window.addEventListener(
+      'pageshow',
+      function () {
+
+        document.body.classList.remove(
+          'page-leave-back'
+        );
+
+      }
+    );
+
+
+  </script>
+
+
 </body>
 </html>
