@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>A Spring Food Bar — Case Study | Erin Lei</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
+
     :root {
       --bg-warm-white: #FAF7F2;
       --text-dark: #1A1A1A;
       --border-color: #E2DDD5;
       --accent-gray: #757471;
+      --media-bg: #F4EFF6;
     }
 
     * {
@@ -22,33 +31,51 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--bg-warm-white);
       color: var(--text-dark);
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
 
-    /* 顶部导航栏 */
+
+    /* =========================
+       TOP NAVIGATION
+       ========================= */
+
     header {
       padding: 2rem 4rem;
       border-bottom: 1px solid var(--border-color);
+
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      background: var(--bg-warm-white);
     }
 
     .back-link {
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.15em;
+
       text-decoration: none;
       color: var(--text-dark);
+
       font-weight: 500;
+
       border-bottom: 1px solid var(--text-dark);
       padding-bottom: 2px;
+
+      transition: opacity 0.3s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.55;
     }
 
     .brand-title {
@@ -57,235 +84,718 @@
       letter-spacing: -0.01em;
     }
 
-    /* 主体内容区：左右两栏布局 */
+
+    /* =========================
+       MAIN TWO-COLUMN LAYOUT
+       ========================= */
+
     .case-container {
       display: flex;
-      flex: 1;
       width: 100%;
+      align-items: stretch;
     }
 
-    /* 左侧：文案与分析详情 */
+
+    /* =========================
+       LEFT — TEXT
+       ========================= */
+
     .case-text-pane {
       width: 55%;
-      padding: 5rem 4rem;
+      padding: 5rem 4rem 6rem 4rem;
+
       border-right: 1px solid var(--border-color);
-      overflow-y: auto;
+    }
+
+    .case-header {
+      margin-bottom: 2.5rem;
     }
 
     .case-header h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
+
+      font-size: 3.4rem;
       font-weight: 400;
-      margin-bottom: 0.5rem;
-      line-height: 1.1;
+
+      line-height: 1.05;
+
+      margin-bottom: 0.8rem;
     }
 
     .case-header .tags {
       font-size: 0.8rem;
+
       color: var(--accent-gray);
-      letter-spacing: 0.1em;
+
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 2.5rem;
     }
 
-    /* 下载报告按钮 */
+
+    /* =========================
+       DOWNLOAD REPORT
+       ========================= */
+
     .download-section {
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
     }
 
     .btn-download {
       display: inline-flex;
       align-items: center;
       gap: 0.8rem;
+
       background-color: var(--text-dark);
       color: var(--bg-warm-white);
-      padding: 0.9rem 1.8rem;
+
+      padding: 0.95rem 1.8rem;
+
       text-decoration: none;
-      font-size: 0.8rem;
+
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
+
       font-weight: 500;
-      transition: background-color 0.3s ease;
+
+      transition:
+        background-color 0.3s ease,
+        transform 0.3s ease;
     }
 
     .btn-download:hover {
       background-color: #333;
+      transform: translateY(-2px);
     }
 
-    /* 报告内容分块 */
+
+    /* =========================
+       CONTENT SECTIONS
+       ========================= */
+
     .section-block {
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
 
     .section-block h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
+
+      font-size: 1.65rem;
       font-weight: 600;
-      margin-bottom: 0.8rem;
+
+      margin-bottom: 0.9rem;
+
       color: var(--text-dark);
     }
 
-    .section-block p, .section-block li {
+    .section-block p,
+    .section-block li {
+
       font-size: 0.95rem;
-      line-height: 1.7;
+
+      line-height: 1.75;
+
       color: #444;
-      margin-bottom: 0.8rem;
+
+      margin-bottom: 0.9rem;
     }
 
     .section-block ul {
-      padding-left: 1.2rem;
+      padding-left: 1.3rem;
     }
 
-    /* 右侧：视频及音量控制 */
+
+    /* =========================
+       RIGHT — VIDEO AREA
+       ========================= */
+
     .case-media-pane {
+
       width: 45%;
-      padding: 4rem;
+
+      background-color: var(--media-bg);
+
+      padding: 4rem 3rem;
+
       display: flex;
       flex-direction: column;
+
+      align-items: center;
+
+      position: relative;
+    }
+
+
+    /* Keep the video visible while reading */
+
+    .video-area {
+
+      position: sticky;
+
+      top: 3rem;
+
+      width: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
       justify-content: center;
       align-items: center;
-      background-color: #F4EFF6;
-      position: relative;
+
+      min-height: calc(100vh - 8rem);
     }
+
+
+    /* =========================
+       9:16 VIDEO
+       Original: 1080 × 1920
+       ========================= */
 
     .video-wrapper {
-      width: 100%;
-      max-width: 400px;
+
+      width: min(100%, 390px);
+
+      aspect-ratio: 9 / 16;
+
       position: relative;
-      border-radius: 4px;
+
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+
+      border-radius: 5px;
+
+      background-color: #000;
+
+      box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.13);
+
     }
 
-    video {
+    .video-wrapper video {
+
       width: 100%;
-      height: auto;
+      height: 100%;
+
       display: block;
-      object-fit: cover;
+
+      /*
+        contain = keep the complete
+        original 9:16 image.
+        No crop and no stretching.
+      */
+
+      object-fit: contain;
+
+      background-color: #000;
     }
 
-    /* 音量控制悬浮按钮 */
+
+    /* =========================
+       SOUND BUTTON
+       ========================= */
+
     .sound-toggle-btn {
+
       position: absolute;
+
       bottom: 1rem;
       right: 1rem;
-      background-color: rgba(0, 0, 0, 0.7);
+
+      background-color: rgba(0, 0, 0, 0.72);
+
       color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
+
+      border: 1px solid rgba(255, 255, 255, 0.25);
+
+      padding: 0.55rem 0.9rem;
+
+      font-family: 'Inter', sans-serif;
+
+      font-size: 0.7rem;
+
       text-transform: uppercase;
+
       letter-spacing: 0.1em;
+
       cursor: pointer;
+
       border-radius: 2px;
-      transition: background-color 0.2s;
+
+      transition: background-color 0.2s ease;
     }
 
     .sound-toggle-btn:hover {
-      background-color: rgba(0, 0, 0, 0.9);
+
+      background-color: rgba(0, 0, 0, 0.92);
+
     }
+
+
+    /* Small caption below video */
+
+    .video-caption {
+
+      margin-top: 1.5rem;
+
+      font-size: 0.72rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.15em;
+
+      color: var(--accent-gray);
+
+      text-align: center;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
 
     @media (max-width: 1024px) {
-      .case-container { flex-direction: column; }
-      .case-text-pane, .case-media-pane { width: 100%; padding: 3rem 2rem; }
-      header { padding: 1.5rem 2rem; }
+
+      header {
+
+        padding: 1.5rem 2rem;
+
+      }
+
+      .case-container {
+
+        flex-direction: column;
+
+      }
+
+      .case-text-pane {
+
+        width: 100%;
+
+        padding: 4rem 2rem;
+
+        border-right: none;
+
+      }
+
+      .case-media-pane {
+
+        width: 100%;
+
+        padding: 4rem 2rem;
+
+      }
+
+      .video-area {
+
+        position: relative;
+
+        top: auto;
+
+        min-height: auto;
+
+      }
+
+      .video-wrapper {
+
+        width: min(100%, 380px);
+
+      }
+
     }
+
+
+    @media (max-width: 600px) {
+
+      header {
+
+        padding: 1.2rem 1.3rem;
+
+      }
+
+      .brand-title {
+
+        font-size: 1rem;
+
+      }
+
+      .case-text-pane {
+
+        padding: 3rem 1.4rem;
+
+      }
+
+      .case-header h1 {
+
+        font-size: 2.7rem;
+
+      }
+
+      .case-media-pane {
+
+        padding: 3rem 1.4rem;
+
+      }
+
+      .video-wrapper {
+
+        width: min(100%, 330px);
+
+      }
+
+    }
+
   </style>
 </head>
+
+
 <body>
 
+
+  <!-- =========================
+       TOP NAVIGATION
+       ========================= -->
+
   <header>
-    <a href="../index.html" class="back-link">← Back to Portfolio</a>
-    <div class="brand-title">Erin Lei — Case Study</div>
+
+    <a href="../index.html" class="back-link">
+      ← Back to Portfolio
+    </a>
+
+    <div class="brand-title">
+      Erin Lei — Case Study
+    </div>
+
   </header>
 
+
+  <!-- =========================
+       MAIN CONTENT
+       ========================= -->
+
   <div class="case-container">
-    
-    <!-- 左侧：文案与策略分析 -->
-    <div class="case-text-pane">
+
+
+    <!-- =========================
+         LEFT SIDE
+         ========================= -->
+
+    <main class="case-text-pane">
+
+
       <div class="case-header">
+
         <h1>A Spring Food Bar</h1>
-        <p class="tags">Digital & Social Media Marketing Strategy</p>
+
+        <p class="tags">
+          Digital & Social Media Marketing Strategy
+        </p>
+
       </div>
 
-      <!-- 专业分析报告下载区域 -->
+
+      <!-- REPORT DOWNLOAD -->
+
       <div class="download-section">
-        <a href="../assets/report.pdf" download class="btn-download">
+
+        <a
+          href="./report.pdf"
+          download="A-Spring-Food-Bar-Analysis-Report.pdf"
+          class="btn-download"
+        >
           ↓ Download Full Analysis Report (PDF)
         </a>
+
       </div>
 
-      <!-- A. Target Audience -->
+
+      <!-- TARGET AUDIENCE -->
+
       <div class="section-block">
+
         <h3>Target Audience</h3>
-        <p>The target audience includes two key segments. The first group is local families living in Hobart aged 25–55 who prefer clean, safe, and spacious restaurants and are open to trying different cuisines. The second group is Chinese consumers in Hobart aged 18–40, including international students and migrants, who look for authentic Chinese food for social gatherings. Both groups value food quality, a comfortable dining environment, and shared dining experiences.</p>
-        <p>A key problem is finding restaurants in Hobart that feel both authentic and clean and are suitable for group dining. These audiences commonly use TikTok and Instagram for food discovery and prefer short, casual, and visually engaging video content.</p>
+
+        <p>
+          The target audience includes two key segments. The first group is
+          local families living in Hobart aged 25–55 who prefer clean, safe,
+          and spacious restaurants and are open to trying different cuisines.
+          The second group is Chinese consumers in Hobart aged 18–40,
+          including international students and migrants, who look for
+          authentic Chinese food for social gatherings. Both groups value food
+          quality, a comfortable dining environment, and shared dining
+          experiences.
+        </p>
+
+        <p>
+          A key problem is finding restaurants in Hobart that feel both
+          authentic and clean and are suitable for group dining. These
+          audiences commonly use TikTok and Instagram for food discovery and
+          prefer short, casual, and visually engaging video content.
+        </p>
+
       </div>
 
-      <!-- B. Objective -->
+
+      <!-- OBJECTIVE -->
+
       <div class="section-block">
+
         <h3>Objective</h3>
-        <p>Increase dine-in customer traffic at A Spring Food Bar by improving local awareness through short-form video content on TikTok and Instagram Reels within four weeks. This focuses on the awareness and action stages of the consumer journey, where audiences discover the restaurant through social media and are encouraged to visit in person.</p>
+
+        <p>
+          Increase dine-in customer traffic at A Spring Food Bar by improving
+          local awareness through short-form video content on TikTok and
+          Instagram Reels within four weeks. This focuses on the awareness and
+          action stages of the consumer journey, where audiences discover the
+          restaurant through social media and are encouraged to visit in
+          person.
+        </p>
+
       </div>
 
-      <!-- C. Core Message -->
+
+      <!-- CORE MESSAGE -->
+
       <div class="section-block">
+
         <h3>Core Message</h3>
-        <p>A Spring Food Bar offers clean, high-quality, and authentic Chinese food in Hobart, suitable for family meals and group dining.</p>
+
+        <p>
+          A Spring Food Bar offers clean, high-quality, and authentic Chinese
+          food in Hobart, suitable for family meals and group dining.
+        </p>
+
       </div>
 
-      <!-- D. Platform Selection -->
+
+      <!-- PLATFORM -->
+
       <div class="section-block">
+
         <h3>Platform Selection</h3>
-        <p>TikTok and Instagram Reels are selected because they are highly popular among the target audiences and effective for food discovery. These platforms prioritise short-form engaging content and algorithm-driven distribution, which helps reach users based on interests and behaviour. The short video format also suits a creative opening and makes it easy to present the restaurant’s location, environment, and food quickly and clearly.</p>
+
+        <p>
+          TikTok and Instagram Reels are selected because they are highly
+          popular among the target audiences and effective for food discovery.
+          These platforms prioritise short-form engaging content and
+          algorithm-driven distribution, which helps reach users based on
+          interests and behaviour. The short video format also suits a
+          creative opening and makes it easy to present the restaurant’s
+          location, environment, and food quickly and clearly.
+        </p>
+
       </div>
 
-      <!-- E. Content Structure -->
+
+      <!-- CONTENT STRUCTURE -->
+
       <div class="section-block">
+
         <h3>Content Structure (AIDA Model)</h3>
+
         <ul>
-          <li><strong>Attention:</strong> Created through a POV-style opening with a meme-based visual hook and a creative transition that shifts from the imagined scenario to the real restaurant.</li>
-          <li><strong>Interest:</strong> Developed by presenting the restaurant location and showing the dining environment in a clear and observational style.</li>
-          <li><strong>Desire:</strong> Built through menu and food visuals supported by personal comments from a Chinese consumer perspective on authenticity and taste. Bilingual captions are used throughout the video to make the content accessible to both English-speaking families and Chinese consumers.</li>
-          <li><strong>Action:</strong> Encouraged through a direct recommendation and an invitation for viewers to visit the restaurant for group dining.</li>
+
+          <li>
+            <strong>Attention:</strong>
+            Created through a POV-style opening with a meme-based visual hook
+            and a creative transition that shifts from the imagined scenario
+            to the real restaurant.
+          </li>
+
+          <li>
+            <strong>Interest:</strong>
+            Developed by presenting the restaurant location and showing the
+            dining environment in a clear and observational style.
+          </li>
+
+          <li>
+            <strong>Desire:</strong>
+            Built through menu and food visuals supported by personal comments
+            from a Chinese consumer perspective on authenticity and taste.
+            Bilingual captions are used throughout the video to make the
+            content accessible to both English-speaking families and Chinese
+            consumers.
+          </li>
+
+          <li>
+            <strong>Action:</strong>
+            Encouraged through a direct recommendation and an invitation for
+            viewers to visit the restaurant for group dining.
+          </li>
+
         </ul>
+
       </div>
 
-      <!-- F. Key Performance Indicators -->
+
+      <!-- KPIs -->
+
       <div class="section-block">
-        <h3>Key Performance Indicators (KPIs)</h3>
-        <p>Video views measure overall awareness. Watch time indicates engagement and content retention. Saves and comments reflect interest in the restaurant. Profile visits and location searches suggest stronger visit intention. These metrics represent different stages of audience response and help evaluate whether the video successfully drives awareness and increases dine-in traffic.</p>
-      </div>
-    </div>
 
-    <!-- 右侧：循环视频与音量控制 -->
-    <div class="case-media-pane">
-      <div class="video-wrapper">
-        <!-- 默认设置 autoplay、loop、muted 确保自动循环播放 -->
-        <video id="promoVideo" autoplay loop muted playsinline>
-          <source src="../assets/spring-food-video.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <!-- 音量开关按钮 -->
-        <button id="soundToggle" class="sound-toggle-btn" onclick="toggleSound()">Unmute</button>
+        <h3>Key Performance Indicators (KPIs)</h3>
+
+        <p>
+          Video views measure overall awareness. Watch time indicates
+          engagement and content retention. Saves and comments reflect
+          interest in the restaurant. Profile visits and location searches
+          suggest stronger visit intention. These metrics represent different
+          stages of audience response and help evaluate whether the video
+          successfully drives awareness and increases dine-in traffic.
+        </p>
+
       </div>
-    </div>
+
+
+    </main>
+
+
+    <!-- =========================
+         RIGHT SIDE — VIDEO
+         ========================= -->
+
+    <aside class="case-media-pane">
+
+
+      <div class="video-area">
+
+
+        <div class="video-wrapper">
+
+
+          <video
+            id="promoVideo"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="auto"
+          >
+
+            <source
+              src="./spring-food-video.mp4"
+              type="video/mp4"
+            >
+
+            Your browser does not support the video tag.
+
+          </video>
+
+
+          <button
+            id="soundToggle"
+            class="sound-toggle-btn"
+            type="button"
+          >
+            Unmute
+          </button>
+
+
+        </div>
+
+
+        <p class="video-caption">
+          Promotional Video · TikTok / Instagram Reels
+        </p>
+
+
+      </div>
+
+
+    </aside>
+
 
   </div>
 
+
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
+
   <script>
-    function toggleSound() {
-      const video = document.getElementById('promoVideo');
-      const btn = document.getElementById('soundToggle');
-      if (video.muted) {
-        video.muted = false;
-        btn.innerText = 'Mute';
-      } else {
-        video.muted = true;
-        btn.innerText = 'Unmute';
+
+    const video = document.getElementById('promoVideo');
+    const soundButton = document.getElementById('soundToggle');
+
+
+    /*
+      Try autoplay when the video is ready.
+      Muted autoplay is supported by modern browsers.
+    */
+
+    video.addEventListener('loadedmetadata', () => {
+
+      video.muted = true;
+
+      const playPromise = video.play();
+
+      if (playPromise !== undefined) {
+
+        playPromise.catch(() => {
+
+          console.log('Autoplay was prevented by the browser.');
+
+        });
+
       }
-    }
+
+    });
+
+
+    /*
+      Additional loop protection.
+      The HTML "loop" attribute should already loop,
+      but this ensures the video restarts if needed.
+    */
+
+    video.addEventListener('ended', () => {
+
+      video.currentTime = 0;
+
+      video.play();
+
+    });
+
+
+    /*
+      Sound control
+    */
+
+    soundButton.addEventListener('click', () => {
+
+      if (video.muted) {
+
+        video.muted = false;
+        video.volume = 1;
+
+        soundButton.textContent = 'Mute';
+
+      } else {
+
+        video.muted = true;
+
+        soundButton.textContent = 'Unmute';
+
+      }
+
+    });
+
+
+    /*
+      If the browser pauses the video when switching tabs,
+      try playing again after the user returns.
+    */
+
+    document.addEventListener('visibilitychange', () => {
+
+      if (!document.hidden && video.paused) {
+
+        video.play().catch(() => {});
+
+      }
+
+    });
+
   </script>
+
 
 </body>
 </html>
